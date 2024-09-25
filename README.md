@@ -1,32 +1,3 @@
-# My Personal Project
-
-## A subtitle
-
-A *bulleted* list:
-- item 1
-- item 2
-- item 3
-
-An example of text with **bold** and *italic* fonts.  
-
-include 2 or 3 of these elements
-
-
-- daily streak app like duolingo has
-    - different streaks for different activities?
-- timer function that records how long you've been doing a certain task
-    - being able to set custom tags
-    - displaying it as an over time bar graph like toggl
-
-It could be that you can create an activity and set certain tags for it
-like an organization app, then your able to track your daily time commitment
-to said activity and view your consistency (streak) and how much time you've
-put into the activity on a daily basis (graph) [not sure if it should show 
-just what day the activity was done or the time as well]
-
-- should be very streamline
-- stretch goals: create mobile version and add widgets
-
 # DailyPulse: Log Time and Maintain Streaks to Achieve Your Goals
 
 ## What will the application do?
@@ -66,4 +37,3 @@ Habits. I gave this book a read from the reccomendation of a friend, and it help
 in changing my perspective on life goals and how to achieve them. It entails how
 tiny behaviours can compound into remarkable results, which is what this app is
 all about.
-
