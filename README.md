@@ -1,7 +1,7 @@
 # DailyPulse: Log Time and Maintain Streaks to Achieve Your Goals
 
 ## What will the application do?
-   The core idea of this app revolves around building consistency in your routines
+The core idea of this app revolves around building consistency in your routines
 by keeping track of how many continuous days you've worked on your goals and
 logging your minutes/ hours to visualize the time you've committed.
 Key Features:
@@ -13,13 +13,13 @@ Key Features:
 - Visual bar graph to see daily time commitment for each task
 
 ## Who will use it?
-   DailyPulse is designed for indivuals that are aiming to improve their productivity
+DailyPulse is designed for indivuals that are aiming to improve their productivity
 and time management. This app is meant for users who need just that extra bit of
 motivation, in the form of keeping up a daily streak. It's meant for those that
 want to track their time spent and visualize it in a clean manner.
 
 ## Why is this project of interest to you?
-   I've been looking into self improvement and productivity for a long time in my
+I've been looking into self improvement and productivity for a long time in my
 journey to become the best version of myself. One of the biggest walls that I ran
 into was a lack of motivation to keep up consistency in whatever tasks were
 required. One day I noticed that there was an exception to this issue, my Duolingo
@@ -32,7 +32,7 @@ with the visual time loggins features, and a few more quality of life additions,
 DailyPulse is the perfect productivity companion app that I've been
 looking for.
 
-   One of the core concepts that inspired this app is from a book called Atomic 
+One of the core concepts that inspired this app is from a book called Atomic 
 Habits. I gave this book a read from the reccomendation of a friend, and it helped
 in changing my perspective on life goals and how to achieve them. It entails how
 tiny behaviours can compound into remarkable results, which is what this app is
