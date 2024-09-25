@@ -37,3 +37,13 @@ Habits. I gave this book a read from the reccomendation of a friend, and it help
 in changing my perspective on life goals and how to achieve them. It entails how
 tiny behaviours can compound into remarkable results, which is what this app is
 all about.
+
+## User Stories
+- As a user, I want to be able to add a task to my list of tasks
+- As a user, I want to be able to assign tags to those tasks
+- As a user, I want to be able to view my list of tasks sorted by tags
+- As a user, I want to be able to delete tasks
+- As a user, I want to be able to record the time I spent on a task
+- As a user, I want to be able to see my streak for a task
+- As a user, I want to be able to see my overall time spent on a task
+- As a user, I want to be able to see a graph detailing my daily time spent on a task
