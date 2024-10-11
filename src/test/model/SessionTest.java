@@ -1,15 +1,16 @@
 package model;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SessionTest {
-    
+class SessionTest {
+    private Session testSession;
+
     @BeforeEach
     void runBefore() {
-
+        testSession = new Session(0);
     }
 
     @Test

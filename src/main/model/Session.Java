@@ -15,6 +15,9 @@ public class Session {
     */
     public Session(int durationInHours) {
         // !!!
+        this.durationInHours = durationInHours;
+        this.sessionId = sessionId;
+        this.date = LocalDate.now();
     }
 
     /* 
@@ -23,8 +26,9 @@ public class Session {
      * EFFECTS: sets the id for the session
      * 
     */
-    public void setId() {
+    public void setId(int sessionId) {
         // !!!
+        this.sessionId = sessionId;
     }
 
     /* 
@@ -32,20 +36,24 @@ public class Session {
      * EFFECTS: sets the date for the session
      * 
     */
-    public void setDate() {
+    public void setDate(LocalDate date) {
         // !!!
+        this.date = date;
     }
 
     public int getDurationInHours() {
         // !!!
+        return durationInHours;
     }
 
     public int getId() {
         // !!!
+        return sessionId;
     }
 
     public LocalDate getDate() {
         // !!!
+        return date;
     }
 
 }
