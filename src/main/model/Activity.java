@@ -160,8 +160,9 @@ public class Activity {
      */
     @Override
     public String toString() {
-        return "Activity Name: " + name + ", " + streak + " days, "
-                + "Total Time: " + totalTime + "hours, Sessions: "
-                + sessions.size();
-    }
+        return "Activity Name: " + name + ", Sessions: " + sessions.size() + ", "
+            + "Streak: " + streak + " days, "
+            + "Total Time: " + totalTime + " hours";
+}
+
 }

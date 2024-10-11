@@ -1,6 +1,8 @@
 package model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.List;
 import java.time.LocalDate;
 
@@ -48,7 +50,20 @@ class ActivityTest {
         assertEquals(2, testActivity.getSessions().size());
         assertEquals(5, testActivity.getDateTotalTime(LocalDate.of(2020, 1, 1)));
     }
-    
+
+    @Test
+    void testAddSessionNonConsecutiveDate() {
+        Session session1 = new Session(5);
+        session1.setDate(LocalDate.of(2020, 1, 1));
+        testActivity.addSession(session1);
+        assertEquals(1, testActivity.getStreak());
+        Session session2 = new Session(5);
+        session2.setDate(LocalDate.of(2020, 1, 3));
+        testActivity.addSession(session2);
+        assertEquals(1, testActivity.getStreak());
+        assertEquals(2, testActivity.getSessions().size());
+    }
+
     @Test
     void testUpdateSession() {
         Session session1 = new Session(5);
@@ -67,13 +82,13 @@ class ActivityTest {
         Session session2 = new Session(10);
         testActivity.addSession(session1);
         testActivity.addSession(session2);
-        assertEquals(2, testActivity.getSessions().size());
-        assertEquals(15, testActivity.getTotalTime());
-        assertEquals(2, testActivity.getStreak());
-        testActivity.removeSession(session1);
         assertEquals(1, testActivity.getSessions().size());
-        assertEquals(10, testActivity.getTotalTime());
+        assertEquals(15, testActivity.getTotalTime());
         assertEquals(1, testActivity.getStreak());
+        testActivity.removeSession(session1);
+        assertEquals(0, testActivity.getSessions().size());
+        assertEquals(0, testActivity.getTotalTime());
+        assertEquals(0, testActivity.getStreak());
     }
 
     @Test
@@ -82,13 +97,69 @@ class ActivityTest {
         Session session2 = new Session(10);
         testActivity.addSession(session1);
         testActivity.addSession(session2);
-        assertEquals(2, testActivity.getSessions().size());
+        assertEquals(1, testActivity.getSessions().size());
         assertEquals(15, testActivity.getTotalTime());
-        assertEquals(2, testActivity.getStreak());
+        assertEquals(1, testActivity.getStreak());
         testActivity.removeSession(session2);
         assertEquals(1, testActivity.getSessions().size());
-        assertEquals(5, testActivity.getTotalTime());
+        assertEquals(15, testActivity.getTotalTime());
         assertEquals(1, testActivity.getStreak());
+    }
+
+    @Test
+    void testUpdateStreak() {
+        Session session1 = new Session(5);
+        session1.setDate(LocalDate.of(2020, 1, 1));
+        testActivity.addSession(session1);
+        Session session2 = new Session(5);
+        session2.setDate(LocalDate.of(2020, 1, 2));
+        testActivity.addSession(session2);
+        Session session3 = new Session(5);
+        session3.setDate(LocalDate.of(2020, 1, 3));
+        testActivity.addSession(session3);
+        assertEquals(3, testActivity.getStreak());
+        testActivity.removeSession(session3);
+        assertEquals(2, testActivity.getStreak());
+    }
+
+    @Test
+    void testUpdateStreakInnerIfConditionFalse() {
+        Session session1 = new Session(5);
+        session1.setDate(LocalDate.of(2020, 1, 1));
+        testActivity.addSession(session1);
+        Session session2 = new Session(5);
+        session2.setDate(LocalDate.of(2020, 1, 3));
+        testActivity.addSession(session2);
+        Session session3 = new Session(5);
+        session3.setDate(LocalDate.of(2020, 1, 5));
+        testActivity.addSession(session3);
+        assertEquals(1, testActivity.getStreak());
+        testActivity.removeSession(session3);
+        assertEquals(1, testActivity.getStreak());
+    }
+
+
+    @Test
+    void testRemoveSessionToOne() {
+        Session session1 = new Session(5);
+        session1.setDate(LocalDate.of(2020, 1, 1));
+        testActivity.addSession(session1);
+        Session session2 = new Session(5);
+        session2.setDate(LocalDate.of(2020, 1, 2));
+        testActivity.addSession(session2);
+        assertEquals(2, testActivity.getStreak());
+        testActivity.removeSession(session2);
+        assertEquals(1, testActivity.getStreak());
+    }
+
+    @Test
+    void testRemoveSessionToZero() {
+        Session session1 = new Session(5);
+        session1.setDate(LocalDate.of(2020, 1, 1));
+        testActivity.addSession(session1);
+        assertEquals(1, testActivity.getStreak());
+        testActivity.removeSession(session1);
+        assertEquals(0, testActivity.getStreak());
     }
 
     @Test
@@ -97,7 +168,7 @@ class ActivityTest {
         Session session2 = new Session(10);
         testActivity.addSession(session1);
         testActivity.addSession(session2);
-        assertEquals(2, testActivity.getSessions().size());
+        assertEquals(1, testActivity.getSessions().size());
         assertEquals(15, testActivity.getTotalTime());
         testActivity.removeSession(session1);
         testActivity.removeSession(session2);
@@ -139,6 +210,15 @@ class ActivityTest {
         assertEquals(10, sessions2.get(0).getDurationInHours());
     }
 
+    @Test
+    void testGetSessionsOnDateEmpty() {
+        Session session1 = new Session(5);
+        session1.setDate(LocalDate.of(2020, 1, 1));
+        testActivity.addSession(session1);
+        List<Session> sessions = testActivity.getSessionsOnDate(LocalDate.of(2020, 1, 2));
+        assertTrue(sessions.isEmpty());
+    }
+    
     @Test
     void testGetStreak() {
         Session session1 = new Session(5);
@@ -190,7 +270,7 @@ class ActivityTest {
         Session session3 = new Session(15);
         session3.setDate(LocalDate.of(2020, 1, 2));
         testActivity.addSession(session3);
-        assertEquals(25, testActivity.getTotalTime());
+        assertEquals(30, testActivity.getTotalTime());
     }
 
     @Test
@@ -211,6 +291,15 @@ class ActivityTest {
     }
 
     @Test
+    void testGetDateTotalTimeEmpty() {
+        Session session1 = new Session(5);
+        session1.setDate(LocalDate.of(2020, 1, 1));
+        testActivity.addSession(session1);
+        int totalTime = testActivity.getDateTotalTime(LocalDate.of(2020, 1, 2));
+        assertEquals(0, totalTime);
+    }
+
+    @Test
     void testGetNextSessionId() {
         Session session1 = new Session(5);
         session1.setDate(LocalDate.of(2020, 1, 1));
@@ -227,13 +316,18 @@ class ActivityTest {
     }
 
     @Test
-    void testActivityToString() {
+    void testToString() {
         Session session1 = new Session(5);
         session1.setDate(LocalDate.of(2020, 1, 1));
         testActivity.addSession(session1);
         Session session2 = new Session(10);
         session2.setDate(LocalDate.of(2020, 1, 2));
         testActivity.addSession(session2);
-        assertEquals("Activity Name: Drawing, Streak: 2 days, Total Time: 15 hours, Sessions: 2", testActivity.toString());
+        assertEquals("Activity Name: Coding, Sessions: 2, Streak: 2 days, Total Time: 15 hours", testActivity.toString());
+    }
+
+    @Test
+    void testToStringEmpty() {
+        assertEquals("Activity Name: Coding, Sessions: 0, Streak: 0 days, Total Time: 0 hours", testActivity.toString());
     }
 }
