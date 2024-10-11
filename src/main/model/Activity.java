@@ -32,6 +32,24 @@ public class Activity {
     }
 
     /* 
+     * REQUIRES: streak >= 0
+     * MODIFIES: this
+     * EFFECTS: sets the name of the activity
+    */
+    public void setStreak(int streak) {
+        this.streak = streak;
+    }
+
+    /* 
+     * REQUIRES: totalTime >= 0
+     * MODIFIES: this
+     * EFFECTS: sets the totalTime of the activity
+    */
+    public void setTotalTime(int totalTime) {
+        this.totalTime = totalTime;
+    }
+
+    /* 
      * REQUIRES: new session must have a different date to previous ones
      * MODIFIES: this
      * EFFECTS: adds new session to activity if date has changed;

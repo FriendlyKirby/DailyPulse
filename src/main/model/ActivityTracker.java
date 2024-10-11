@@ -32,7 +32,7 @@ public class ActivityTracker {
     /* 
      * EFFECTS: get activity from activities list by name
     */
-    public Activity getActivity(String name) {
+    public Activity getActivityByName(String name) {
         // !!!
         return activities.get(0);
     }
@@ -44,14 +44,15 @@ public class ActivityTracker {
     /*  
      * EFFECTS: returns list of activity names
     */
-    public List<String> getActivitieNames() {
+    public List<String> getActivityNames() {
         // !!!
         return new ArrayList<>();
     }
 
     /* 
      * MODIFIES: this
-     * EFFECTS: sorts activities list alphabetically
+     * EFFECTS: sorts activities list alphabetically;
+     *          if same, positions don't swap
     */
     public void sortByName() {
         // !!!
@@ -59,7 +60,8 @@ public class ActivityTracker {
 
     /* 
      * MODIFIES: this
-     * EFFECTS: sorts actvities list in decreasing order of streak
+     * EFFECTS: sorts actvities list in decreasing order of streak;
+     *          if same, positions don't swap
     */
     public void sortByStreak() {
         // !!!
@@ -67,7 +69,8 @@ public class ActivityTracker {
 
     /* 
      * MODIFIES: this
-     * EFFECTS: sorts activities list in decreasing order of total time
+     * EFFECTS: sorts activities list in decreasing order of total time;
+     *          if same, positions don't swap
     */
     public void sortByTotalTime() {
         // !!!

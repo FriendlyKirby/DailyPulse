@@ -33,6 +33,22 @@ class ActivityTest {
     }
 
     @Test
+    void testSetStreak() {
+        testActivity.setStreak(0);
+        assertEquals(0, testActivity.getStreak());
+        testActivity.setStreak(1);
+        assertEquals(1, testActivity.getStreak());
+    }
+
+    @Test
+    void testSetTotalTime() {
+        testActivity.setTotalTime(1);
+        assertEquals(1, testActivity.getTotalTime());
+        testActivity.setTotalTime(0);
+        assertEquals(0, testActivity.getTotalTime());
+    }
+
+    @Test
     void testAddSession() {
         Session session1 = new Session(5);
         testActivity.addSession(session1);
