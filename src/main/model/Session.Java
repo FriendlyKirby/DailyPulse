@@ -14,9 +14,7 @@ public class Session {
      *          date is set to the current date.
     */
     public Session(int durationInHours) {
-        // !!!
         this.durationInHours = durationInHours;
-        this.sessionId = sessionId;
         this.date = LocalDate.now();
     }
 
@@ -27,33 +25,28 @@ public class Session {
      * 
     */
     public void setId(int sessionId) {
-        // !!!
         this.sessionId = sessionId;
     }
 
-    /* 
-     * MODIFIES: this
-     * EFFECTS: sets the date for the session
-     * 
-    */
-    public void setDate(LocalDate date) {
-        // !!!
-        this.date = date;
-    }
-
     public int getDurationInHours() {
-        // !!!
         return durationInHours;
     }
 
     public int getId() {
-        // !!!
         return sessionId;
     }
 
     public LocalDate getDate() {
-        // !!!
         return date;
     }
 
+    /*
+     * EFFECTS: returns a string representation of session
+     */
+    @Override
+    public String toString() {
+        return "Session ID: " + sessionId + 
+               ", Duration: " + durationInHours + " hours" + 
+               ", Date: " + date;
+    }
 }
