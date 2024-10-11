@@ -1,7 +1,10 @@
 package model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
@@ -33,6 +36,13 @@ class ActivityTrackerTest {
     }
 
     @Test
+    void testAddActivityDuplicate() {
+        testActivityTracker.addActivity(activity1);
+        testActivityTracker.addActivity(activity1);
+        assertEquals(1, testActivityTracker.getActivities().size());
+    }
+
+    @Test
     void testAddMultipleActivities() {
         testActivityTracker.addActivity(activity1);
         testActivityTracker.addActivity(activity2);
@@ -51,12 +61,36 @@ class ActivityTrackerTest {
         assertEquals(0, testActivityTracker.getActivities().size());
     }
 
+   @Test
+    void testRemoveActivityNotInList() {
+        testActivityTracker.addActivity(activity1);
+        try {
+            testActivityTracker.removeActivity(activity2);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Activity not found", e.getMessage());
+        }
+    }
+
     @Test
     void testGetActivityByName() {
         testActivityTracker.addActivity(activity1);
         testActivityTracker.addActivity(activity2);
         assertEquals(activity1, testActivityTracker.getActivityByName("Coding"));
         assertEquals(activity2, testActivityTracker.getActivityByName("Drawing"));
+    }
+
+    @Test
+    void testGetActivityByNameNull() {
+        try {
+            testActivityTracker.getActivityByName(null);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Activity name cannot be null.", e.getMessage());
+        }
+    }
+
+    @Test
+    void testGetActivityByNameNotExist() {
+        assertNull(testActivityTracker.getActivityByName("activity0"));
     }
 
     @Test
@@ -78,6 +112,12 @@ class ActivityTrackerTest {
         assertEquals("Drawing", names.get(1));
     }
 
+    @Test
+    void testGetActivityNamesEmpty() {
+        List<String> names = testActivityTracker.getActivityNames();
+        assertTrue(names.isEmpty());
+    }
+    
     @Test
     void testSortByNameNoChange() {
         testActivityTracker.addActivity(activity1);
@@ -107,6 +147,11 @@ class ActivityTrackerTest {
         assertEquals("acb", testActivityTracker.getActivities().get(1).getName());
     }
 
+    @Test
+    void testSortByNameEmptyList() {
+        testActivityTracker.sortByName();
+        assertTrue(testActivityTracker.getActivities().isEmpty());
+    }
 
     @Test
     void testSortByStreakNoChange() {
@@ -142,6 +187,11 @@ class ActivityTrackerTest {
     }
 
     @Test
+    void testSortByStreakEmptyList() {
+        testActivityTracker.sortByStreak();
+        assertTrue(testActivityTracker.getActivities().isEmpty());
+    }
+    @Test
     void testSortByTotalTimeNoChange() {
         testActivityTracker.addActivity(activity1);
         testActivityTracker.getActivityByName("Coding").setTotalTime(0);
@@ -172,5 +222,11 @@ class ActivityTrackerTest {
         testActivityTracker.sortByTotalTime();
         assertEquals("Coding", testActivityTracker.getActivities().get(0).getName());
         assertEquals("Drawing", testActivityTracker.getActivities().get(1).getName());
+    }
+
+    @Test
+    void testSortByTotalTimeEmptyList() {
+        testActivityTracker.sortByTotalTime();
+        assertTrue(testActivityTracker.getActivities().isEmpty());
     }
 }
