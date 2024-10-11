@@ -19,13 +19,29 @@ public class Session {
     }
 
     /* 
+     * REQUIRES: duration >= 0
+     * MODIFIES: this
+     * EFFECTS: adds time to durationInHours for the session
+    */
+    public void addDuration(int durationInHours) {
+        this.durationInHours += durationInHours;
+    }
+
+    /* 
      * REQUIRES: id >= 1
      * MODIFIES: this
      * EFFECTS: sets the id for the session
-     * 
     */
     public void setId(int sessionId) {
         this.sessionId = sessionId;
+    }
+
+    /* 
+     * MODIFIES: this
+     * EFFECTS: sets the date for the session
+    */
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public int getDurationInHours() {

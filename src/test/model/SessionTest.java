@@ -22,10 +22,29 @@ class SessionTest {
     }
 
     @Test
+    void testAddDuration() {
+        testSession.addDuration(5);
+        assertEquals(15, testSession.getDurationInHours());
+    }
+
+    @Test
+    void testAddMultipleDurations() {
+        testSession.addDuration(5);
+        testSession.addDuration(10);
+        assertEquals(25, testSession.getDurationInHours());
+    }
+
+    @Test
     void testSetId() {
         assertEquals(1, testSession.getId());
         testSession.setId(2);
         assertEquals(2, testSession.getId());
+    }
+
+    @Test
+    void testSetDate() {
+        testSession.setDate(LocalDate.of(2020,01,02));
+        assertEquals(LocalDate.of(2020,01,02), testSession.getDate());
     }
 
     @Test

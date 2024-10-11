@@ -25,7 +25,7 @@ public class Activity {
      * MODIFIES: this
      * EFFECTS: sets the name of the activity
     */
-    public void setName() {
+    public void setName(String name) {
         // !!!
     }
 
@@ -36,17 +36,9 @@ public class Activity {
      *          updates totalTime and streak;
      *          assigns the nextSessionId;
      *          updates the nextSessionId;
+     *          if the date is the same as the previous session, calls updateSessionTime()
     */
     public void addSession(Session session) {
-        // !!!
-    }
-    
-    /* 
-     * REQUIRES: new session must have the same date to previous ones
-     * MODIFIES: this
-     * EFFECTS: updates the session's time by adding a new session
-    */
-    public void updateSessionTime(Session session) {
         // !!!
     }
 
@@ -86,7 +78,7 @@ public class Activity {
     /*
      * EFFECTS: returns the total time of sessions from a sepcific date
      */
-    public int getDateTotalTime() {
+    public int getDateTotalTime(LocalDate date) {
         // !!!
         return totalTime;
     }
