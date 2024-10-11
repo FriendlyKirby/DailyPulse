@@ -29,23 +29,24 @@ public class ActivityTrackerApp {
     private void runActivityTracker() {
         boolean keepGoing = true;
         String command = null;
-
+    
         init();
-
+    
         System.out.println("Welcome to DailyPulse");
-
+    
         while (keepGoing) {
             displayMainMenu();
-            command = input.next().toLowerCase();
+            command = input.nextLine().trim().toLowerCase();
             if (command.equals("q")) {
                 keepGoing = false;
             } else {
                 mainMenuInput(command);
             }
         }
-
+    
         System.out.println("Make sure to keep on top of your goals!");
     }
+    
 
     // MODIFIES: this
     // EFFECTS: initializes activity tracker
@@ -125,6 +126,7 @@ public class ActivityTrackerApp {
     // MODIFIES: this
     // EFFECTS: adds activity to activity tracker
     private void doAddActivity() {
+        doViewActivities();
         System.out.print("Enter the name of the new activity you want to add: ");
         String name = input.nextLine();
         if (name.isEmpty()) {
@@ -139,6 +141,7 @@ public class ActivityTrackerApp {
     // MODIFIES: this
     // EFFECTS: removes activity from activity tracker, nothing if null
     private void doRemoveActivity() {
+        doViewActivities();
         System.out.print("Enter the name of the activity you want to remove: ");
         String name = input.nextLine();
         Activity activity = activityTracker.getActivityByName(name);
@@ -154,6 +157,7 @@ public class ActivityTrackerApp {
     // MODIFIES: this
     // EFFECTS: takes activity name as input then proceeds you into a new menu
     private void doFindActivity() {
+        doViewActivities();
         System.out.print("Enter the name of the activity you want to look at: ");
         String name = input.nextLine();
         Activity activity = activityTracker.getActivityByName(name);
