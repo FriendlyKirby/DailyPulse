@@ -339,11 +339,13 @@ class ActivityTest {
         Session session2 = new Session(10);
         session2.setDate(LocalDate.of(2020, 1, 2));
         testActivity.addSession(session2);
-        assertEquals("Activity Name: Coding, Sessions: 2, Streak: 2 days, Total Time: 15 hours", testActivity.toString());
+        assertEquals("Activity Name: Coding, Sessions: 2, Streak: 2 days, Total Time: 15 hours",
+                    testActivity.toString());
     }
 
     @Test
     void testToStringEmpty() {
-        assertEquals("Activity Name: Coding, Sessions: 0, Streak: 0 days, Total Time: 0 hours", testActivity.toString());
+        assertEquals("Activity Name: Coding, Sessions: 0, Streak: 0 days, Total Time: 0 hours",
+                    testActivity.toString());
     }
 }

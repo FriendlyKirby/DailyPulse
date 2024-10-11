@@ -80,12 +80,25 @@ public class Activity {
                 totalTime += session.getDurationInHours();
             }
         } else {
-            session.setId(nextSessionId);
-            nextSessionId++;
-            this.sessions.add(session);
-            totalTime += session.getDurationInHours();
-            streak++;
+            addSessionElseCase(session);
         }      
+    }
+
+    /* 
+     * REQUIRES: List<Session> sessions != empty
+     * MODIFIES: this
+     * EFFECTS: sets session id as nextSessionId;
+     *          increases nextSessionId by 1;
+     *          adds this session to sessions;
+     *          increases total time by sesion time;
+     *          increases streak by 1
+    */
+    private void addSessionElseCase(Session session) {
+        session.setId(nextSessionId);
+        nextSessionId++;
+        this.sessions.add(session);
+        totalTime += session.getDurationInHours();
+        streak++;
     }
 
     /* 

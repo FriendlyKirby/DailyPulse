@@ -2,9 +2,7 @@ package model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.List;
 
@@ -61,7 +59,7 @@ class ActivityTrackerTest {
         assertEquals(0, testActivityTracker.getActivities().size());
     }
 
-   @Test
+    @Test
     void testRemoveActivityNotInList() {
         try {
             testActivityTracker.removeActivity(activity1);
@@ -190,6 +188,7 @@ class ActivityTrackerTest {
         testActivityTracker.sortByStreak();
         assertTrue(testActivityTracker.getActivities().isEmpty());
     }
+
     @Test
     void testSortByTotalTimeNoChange() {
         testActivityTracker.addActivity(activity1);
