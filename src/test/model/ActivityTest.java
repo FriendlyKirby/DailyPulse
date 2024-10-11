@@ -64,45 +64,57 @@ class ActivityTest {
     @Test
     void testRemoveSessionBefore() {
         Session session1 = new Session(5);
-        Session session2 = new Session(5);
+        Session session2 = new Session(10);
         testActivity.addSession(session1);
         testActivity.addSession(session2);
         assertEquals(2, testActivity.getSessions().size());
+        assertEquals(15, testActivity.getTotalTime());
+        assertEquals(2, testActivity.getStreak());
         testActivity.removeSession(session1);
         assertEquals(1, testActivity.getSessions().size());
+        assertEquals(10, testActivity.getTotalTime());
+        assertEquals(1, testActivity.getStreak());
     }
 
     @Test
     void testRemoveSessionAfter() {
         Session session1 = new Session(5);
-        Session session2 = new Session(5);
+        Session session2 = new Session(10);
         testActivity.addSession(session1);
         testActivity.addSession(session2);
         assertEquals(2, testActivity.getSessions().size());
+        assertEquals(15, testActivity.getTotalTime());
+        assertEquals(2, testActivity.getStreak());
         testActivity.removeSession(session2);
         assertEquals(1, testActivity.getSessions().size());
+        assertEquals(5, testActivity.getTotalTime());
+        assertEquals(1, testActivity.getStreak());
     }
 
     @Test
     void testRemoveMultiple() {
         Session session1 = new Session(5);
-        Session session2 = new Session(5);
+        Session session2 = new Session(10);
         testActivity.addSession(session1);
         testActivity.addSession(session2);
         assertEquals(2, testActivity.getSessions().size());
+        assertEquals(15, testActivity.getTotalTime());
         testActivity.removeSession(session1);
         testActivity.removeSession(session2);
         assertEquals(0, testActivity.getSessions().size());
+        assertEquals(0, testActivity.getTotalTime());
+        assertEquals(0, testActivity.getStreak());
     }
 
     @Test
     void testRemoveSessionNotExist() {
         Session session1 = new Session(5);
         testActivity.addSession(session1);
-        Session session0 = new Session(0);
-        // session 0 not added to testActivity
+        Session session0 = new Session(10);
         testActivity.removeSession(session0);
         assertEquals(1, testActivity.getSessions().size());
+        assertEquals(5, testActivity.getTotalTime());
+        assertEquals(1, testActivity.getStreak());
     }
 
     @Test

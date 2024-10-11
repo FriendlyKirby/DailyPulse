@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.time.LocalDate;
@@ -17,7 +18,8 @@ public class Activity {
      *          initializes with an empty list of sessions.
     */
     public Activity(String name) {
-        // !!!
+        this.name = name;
+        this.sessions = new ArrayList<>();
     }
 
     /* 
@@ -26,29 +28,81 @@ public class Activity {
      * EFFECTS: sets the name of the activity
     */
     public void setName(String name) {
-        // !!!
+        this.name = name;
     }
 
     /* 
      * REQUIRES: new session must have a different date to previous ones
      * MODIFIES: this
-     * EFFECTS: adds new session to activity;
-     *          updates totalTime and streak;
-     *          assigns the nextSessionId;
+     * EFFECTS: adds new session to activity if date has changed;
+     *          updates totalTime;
+     *          adds 1 to streak if day is +1;
+     *          assigns the nextSessionId as the session id;
      *          updates the nextSessionId;
-     *          if the date is the same as the previous session, calls updateSessionTime()
     */
     public void addSession(Session session) {
-        // !!!
+        if (!this.sessions.isEmpty()) {
+            Session latestSession = this.sessions.get(sessions.size() - 1);
+
+            if (session.getDate().equals(latestSession.getDate())) {
+                latestSession.addDuration(session.getDurationInHours());
+                totalTime += session.getDurationInHours();
+
+            } else if (session.getDate().equals(latestSession.getDate().plusDays(1))) {
+                session.setId(nextSessionId);
+                nextSessionId++;
+                this.sessions.add(session);
+                totalTime += session.getDurationInHours();
+                streak++;
+
+            } else {
+                session.setId(nextSessionId);
+                nextSessionId++;
+                this.sessions.add(session);
+                totalTime += session.getDurationInHours();
+            }
+        } else {
+            session.setId(nextSessionId);
+            nextSessionId++;
+            this.sessions.add(session);
+            totalTime += session.getDurationInHours();
+            streak++;
+        }      
     }
 
     /* 
      * REQUIRES: List<Session> sessions != empty
      * MODIFIES: this
-     * EFFECTS: removes session from List<Session> sessions
+     * EFFECTS: removes session from List<Session> sessions;
+     *          updates total time;
+     *          calls updateStreak();
     */
     public void removeSession(Session session) {
-        // !!!
+        if (this.sessions.contains(session)) {
+            this.sessions.remove(session);
+            totalTime -= session.getDurationInHours();
+            updateStreak();
+        }
+    }
+
+    /* 
+     * MODIFIES: this
+     * EFFECTS: if previous days were consequtive, streak - 1;
+     *          else no change.
+    */
+    private void updateStreak() {
+        if (sessions.size() > 1) {
+            LocalDate latestSessionDay = this.sessions.get(sessions.size() - 1).getDate();
+            LocalDate secondLatestSessionDay = this.sessions.get(sessions.size() - 2).getDate();
+    
+            if (latestSessionDay.equals(secondLatestSessionDay.plusDays(1))) {
+                streak -= 1;
+            }
+        } else if (sessions.size() == 1) {
+            streak = 1;
+        } else {
+            streak = 0;
+        }
     }
 
     public String getName() {
@@ -63,8 +117,15 @@ public class Activity {
      * EFFECTS: returns list of sessions from a specific date
      */
     public List<Session> getSessionsOnDate(LocalDate date) {
-        // !!!
-        return sessions;
+        List<Session> sessionOnDate = new ArrayList<>();
+        
+        for (Session session : this.sessions) {
+            if (session.getDate().equals(date)) {
+                sessionOnDate.add(session);
+            }
+        }
+
+        return sessionOnDate;
     }
 
     public int getStreak() {
@@ -79,8 +140,15 @@ public class Activity {
      * EFFECTS: returns the total time of sessions from a sepcific date
      */
     public int getDateTotalTime(LocalDate date) {
-        // !!!
-        return totalTime;
+        int dateTotalTime = 0;
+        
+        for (Session session : this.sessions) {
+            if (session.getDate().equals(date)) {
+                dateTotalTime += session.getDurationInHours();
+            }
+        }
+
+        return dateTotalTime;
     }
 
     public int getNextSessionId() {
@@ -92,7 +160,8 @@ public class Activity {
      */
     @Override
     public String toString() {
-        return "";
-        // !!!
+        return "Activity Name: " + name + ", " + streak + " days, "
+                + "Total Time: " + totalTime + "hours, Sessions: "
+                + sessions.size();
     }
 }
