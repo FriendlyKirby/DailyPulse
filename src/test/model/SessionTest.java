@@ -49,8 +49,7 @@ class SessionTest {
 
     @Test
     void testToString() {
-        assertEquals("Session ID: 1, Duration: 10 hours, Date: 2024-10-11",
-        testSession.toString());
+        assertEquals("Session ID: 1, Duration: 10 hours, Date: 2024-10-11", testSession.toString());
     }
 
 }
