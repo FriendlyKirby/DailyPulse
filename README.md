@@ -5,12 +5,11 @@ The core idea of this app revolves around building consistency in your routines
 by keeping track of how many continuous days you've worked on your goals and
 logging your minutes/ hours to visualize the time you've committed.
 Key Features:
-- Create different tasks
-- Group, organize, and sort tasks by tags
-- Timer to record how long you've spent on a task
-- Daily streak tracker for each task
-- An overall time spent tracker for each task
-- Visual bar graph to see daily time commitment for each task
+- Create different activities
+- Timer to record how long each session for an activity lasts
+- Daily streak tracker for each activity
+- Overall time spent tracker for each activity
+- Visual bar graph to see daily time commitment for each activity
 
 ## Who will use it?
 DailyPulse is designed for indivuals that are aiming to improve their productivity
@@ -39,11 +38,10 @@ tiny behaviours can compound into remarkable results, which is what this app is
 all about.
 
 ## User Stories
-- As a user, I want to be able to add a task to my list of tasks
-- As a user, I want to be able to assign tags to those tasks
-- As a user, I want to be able to view my list of tasks sorted by tags
-- As a user, I want to be able to delete tasks
-- As a user, I want to be able to record the time I spent on a task
-- As a user, I want to be able to see my streak for a task
-- As a user, I want to be able to see my overall time spent on a task
-- As a user, I want to be able to see a graph detailing my daily time spent on a task
+- As a user, I want to be able to add multiple sessions to an activity.
+- As a user, I want to be able to view and list all sessions for an activity.
+- As a user, I want to be able to delete activities or sessions.
+- As a user, I want to be able to record the time I spent on a session.
+- As a user, I want to be able to see my streak for an activity.
+- As a user, I want to be able to see my overall time spent on an activity.
+- As a user, I want to be able to see a graph detailing my daily time spent on each activity.
