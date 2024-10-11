@@ -83,8 +83,8 @@ class ActivityTrackerTest {
         testActivityTracker.addActivity(activity1);
         testActivityTracker.addActivity(activity2);
         testActivityTracker.sortByName();
-        assertEquals("Coding", testActivityTracker.getActivities().get(0));
-        assertEquals("Drawing", testActivityTracker.getActivities().get(1));
+        assertEquals("Coding", testActivityTracker.getActivities().get(0).getName());
+        assertEquals("Drawing", testActivityTracker.getActivities().get(1).getName());
     }
 
     @Test
@@ -92,8 +92,8 @@ class ActivityTrackerTest {
         testActivityTracker.addActivity(activity2);
         testActivityTracker.addActivity(activity1);
         testActivityTracker.sortByName();
-        assertEquals("Coding", testActivityTracker.getActivities().get(0));
-        assertEquals("Drawing", testActivityTracker.getActivities().get(1));
+        assertEquals("Coding", testActivityTracker.getActivities().get(0).getName());
+        assertEquals("Drawing", testActivityTracker.getActivities().get(1).getName());
     }
 
     @Test
@@ -103,8 +103,8 @@ class ActivityTrackerTest {
         testActivityTracker.addActivity(activity2);
         testActivityTracker.getActivityByName("Drawing").setName("abc");
         testActivityTracker.sortByName();
-        assertEquals("acb", testActivityTracker.getActivities().get(0));
-        assertEquals("abc", testActivityTracker.getActivities().get(1));
+        assertEquals("abc", testActivityTracker.getActivities().get(0).getName());
+        assertEquals("acb", testActivityTracker.getActivities().get(1).getName());
     }
 
 
@@ -115,8 +115,8 @@ class ActivityTrackerTest {
         testActivityTracker.addActivity(activity2);
         testActivityTracker.getActivityByName("Drawing").setStreak(0);
         testActivityTracker.sortByStreak();
-        assertEquals("Coding", testActivityTracker.getActivities().get(0));
-        assertEquals("Drawing", testActivityTracker.getActivities().get(1));
+        assertEquals("Coding", testActivityTracker.getActivities().get(0).getName());
+        assertEquals("Drawing", testActivityTracker.getActivities().get(1).getName());
     }
 
     @Test
@@ -126,8 +126,8 @@ class ActivityTrackerTest {
         testActivityTracker.addActivity(activity2);
         testActivityTracker.getActivityByName("Drawing").setStreak(1);
         testActivityTracker.sortByStreak();
-        assertEquals("Drawing", testActivityTracker.getActivities().get(0));
-        assertEquals("Coding", testActivityTracker.getActivities().get(1));
+        assertEquals("Drawing", testActivityTracker.getActivities().get(0).getName());
+        assertEquals("Coding", testActivityTracker.getActivities().get(1).getName());
     }
 
     @Test
@@ -137,8 +137,8 @@ class ActivityTrackerTest {
         testActivityTracker.addActivity(activity2);
         testActivityTracker.getActivityByName("Drawing").setStreak(0);
         testActivityTracker.sortByStreak();
-        assertEquals("Coding", testActivityTracker.getActivities().get(0));
-        assertEquals("Drawing", testActivityTracker.getActivities().get(1));
+        assertEquals("Coding", testActivityTracker.getActivities().get(0).getName());
+        assertEquals("Drawing", testActivityTracker.getActivities().get(1).getName());
     }
 
     @Test
@@ -148,8 +148,8 @@ class ActivityTrackerTest {
         testActivityTracker.addActivity(activity2);
         testActivityTracker.getActivityByName("Drawing").setTotalTime(0);
         testActivityTracker.sortByTotalTime();
-        assertEquals("Coding", testActivityTracker.getActivities().get(0));
-        assertEquals("Drawing", testActivityTracker.getActivities().get(1));
+        assertEquals("Coding", testActivityTracker.getActivities().get(0).getName());
+        assertEquals("Drawing", testActivityTracker.getActivities().get(1).getName());
     }
 
     @Test
@@ -159,8 +159,8 @@ class ActivityTrackerTest {
         testActivityTracker.addActivity(activity2);
         testActivityTracker.getActivityByName("Drawing").setTotalTime(1);
         testActivityTracker.sortByTotalTime();
-        assertEquals("Drawing", testActivityTracker.getActivities().get(0));
-        assertEquals("Coding", testActivityTracker.getActivities().get(1));
+        assertEquals("Drawing", testActivityTracker.getActivities().get(0).getName());
+        assertEquals("Coding", testActivityTracker.getActivities().get(1).getName());
     }
 
     @Test
@@ -170,7 +170,7 @@ class ActivityTrackerTest {
         testActivityTracker.addActivity(activity2);
         testActivityTracker.getActivityByName("Drawing").setTotalTime(0);
         testActivityTracker.sortByTotalTime();
-        assertEquals("Coding", testActivityTracker.getActivities().get(0));
-        assertEquals("Drawing", testActivityTracker.getActivities().get(1));
+        assertEquals("Coding", testActivityTracker.getActivities().get(0).getName());
+        assertEquals("Drawing", testActivityTracker.getActivities().get(1).getName());
     }
 }
