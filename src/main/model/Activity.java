@@ -163,6 +163,5 @@ public class Activity {
         return "Activity Name: " + name + ", Sessions: " + sessions.size() + ", "
             + "Streak: " + streak + " days, "
             + "Total Time: " + totalTime + " hours";
-}
-
+    }
 }
