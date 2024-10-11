@@ -63,9 +63,8 @@ class ActivityTrackerTest {
 
    @Test
     void testRemoveActivityNotInList() {
-        testActivityTracker.addActivity(activity1);
         try {
-            testActivityTracker.removeActivity(activity2);
+            testActivityTracker.removeActivity(activity1);
         } catch (IllegalArgumentException e) {
             assertEquals("Activity not found", e.getMessage());
         }

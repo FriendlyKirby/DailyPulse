@@ -28,11 +28,10 @@ public class ActivityTracker {
      * EFFECTS: removes activity from activities list
     */
     public void removeActivity(Activity activity) {
-        if (activities.contains(activity)) {
-            activities.remove(activity);
-        } else {
+        if (!activities.contains(activity)) {
             throw new IllegalArgumentException("Activity not found");
         }
+        activities.remove(activity);
     }
 
     /* 
@@ -42,15 +41,15 @@ public class ActivityTracker {
     public Activity getActivityByName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Activity name cannot be null.");
-        } else {
-            for (Activity activity : activities) {
-                if (activity.getName().equals(name)) {
-                    return activity;
-                }
-            }
-            return null;
         }
+        for (Activity activity : activities) {
+            if (activity.getName().equals(name)) {
+                return activity;
+            }
+        }
+        return null;
     }
+    
 
     public List<Activity> getActivities() {
         return activities;
