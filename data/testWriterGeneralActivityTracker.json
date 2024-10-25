@@ -1,0 +1,18 @@
+{"activities": [{
+    "sessions": [
+        {
+            "date": "2023-10-20",
+            "durationInHours": 2,
+            "sessionId": 1
+        },
+        {
+            "date": "2023-10-21",
+            "durationInHours": 3,
+            "sessionId": 2
+        }
+    ],
+    "nextSessionId": 3,
+    "totalTime": 5,
+    "name": "Running",
+    "streak": 3
+}]}
