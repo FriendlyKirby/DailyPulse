@@ -387,12 +387,24 @@ public class ActivityTrackerApp {
 
     // EFFECTS: saves the activity tracker to file
     private void saveActivityTracker() {
-        // stub
+        try {
+            jsonWriter.open();
+            jsonWriter.write(activityTracker);
+            jsonWriter.close();
+            System.out.println("Saved activity tracker to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: loads activity tracker from file
     private void loadActivityTracker() {
-        // stub
+        try {
+            activityTracker = jsonReader.read();
+            System.out.println("Loaded activity tracker from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 }
