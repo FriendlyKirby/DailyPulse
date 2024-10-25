@@ -1,5 +1,7 @@
 package ui;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,6 +13,8 @@ import java.util.TreeMap;
 import model.Activity;
 import model.ActivityTracker;
 import model.Session;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.util.Scanner;
 
@@ -18,6 +22,9 @@ import java.util.Scanner;
 public class ActivityTrackerApp {
     private ActivityTracker activityTracker; // The activity tracker which is the list of activities
     private Scanner input;
+    private static final String JSON_STORE = "./data/activitytracker.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the activity tracker application
     public ActivityTrackerApp() {
@@ -52,6 +59,8 @@ public class ActivityTrackerApp {
     private void init() {
         activityTracker = new ActivityTracker();
         input = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
     }
 
     // EFFECTS: displays option menu to user
@@ -61,8 +70,11 @@ public class ActivityTrackerApp {
         System.out.println("\ta -> Add or remove an activity");
         System.out.println("\tf -> Find a specific activity");
         System.out.println("\ts -> Sort activities");
+        System.out.println("\tsave -> Save activities to file");
+        System.out.println("\tload -> Load activities from file");
         System.out.println("\tq -> Quit");
     }
+    
 
     // MODIFIES: this
     // EFFECTS: takes in input prompt from user and proceeds with action
@@ -80,11 +92,18 @@ public class ActivityTrackerApp {
             case "s":
                 doSortActivities();
                 break;
+            case "save":
+                saveActivityTracker();
+                break;
+            case "load":
+                loadActivityTracker();
+                break;
             default:
                 System.out.println("Selection not valid");
                 break;
         }
     }
+    
 
     // EFFECTS: displays a lit of the activity names
     private void doViewActivities() {
@@ -364,5 +383,16 @@ public class ActivityTrackerApp {
                 System.out.println("You have entered an invalid option.");
                 break;
         }
+    }
+
+    // EFFECTS: saves the activity tracker to file
+    private void saveActivityTracker() {
+        // stub
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads activity tracker from file
+    private void loadActivityTracker() {
+        // stub
     }
 }
