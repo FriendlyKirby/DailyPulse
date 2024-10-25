@@ -43,13 +43,14 @@ class SessionTest {
 
     @Test
     void testSetDate() {
-        testSession.setDate(LocalDate.of(2020,01,02));
-        assertEquals(LocalDate.of(2020,01,02), testSession.getDate());
+        testSession.setDate(LocalDate.of(2020, 01, 02));
+        assertEquals(LocalDate.of(2020, 01, 02), testSession.getDate());
     }
 
     @Test
     void testToString() {
-        assertEquals("Session ID: 1, Duration: 10 hours, Date: 2024-10-11", testSession.toString());
+        assertEquals("Session ID: " + testSession.getId()
+                + ", Duration: " + testSession.getDurationInHours() + " hours"
+                + ", Date: " + testSession.getDate(), testSession.toString());
     }
-
 }

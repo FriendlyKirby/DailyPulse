@@ -154,7 +154,6 @@ class ActivityTest {
         assertEquals(1, testActivity.getStreak());
     }
 
-
     @Test
     void testRemoveSessionToOne() {
         Session session1 = new Session(5);
@@ -234,7 +233,7 @@ class ActivityTest {
         List<Session> sessions = testActivity.getSessionsOnDate(LocalDate.of(2020, 1, 2));
         assertTrue(sessions.isEmpty());
     }
-    
+
     @Test
     void testGetStreak() {
         Session session1 = new Session(5);
@@ -340,12 +339,12 @@ class ActivityTest {
         session2.setDate(LocalDate.of(2020, 1, 2));
         testActivity.addSession(session2);
         assertEquals("Activity Name: Coding, Sessions: 2, Streak: 2 days, Total Time: 15 hours",
-                    testActivity.toString());
+                testActivity.toString());
     }
 
     @Test
     void testToStringEmpty() {
         assertEquals("Activity Name: Coding, Sessions: 0, Streak: 0 days, Total Time: 0 hours",
-                    testActivity.toString());
+                testActivity.toString());
     }
 }

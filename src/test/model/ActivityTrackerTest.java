@@ -19,7 +19,7 @@ class ActivityTrackerTest {
         testActivityTracker = new ActivityTracker();
         activity1 = new Activity("Coding");
         activity2 = new Activity("Drawing");
-        
+
     }
 
     @Test
@@ -114,7 +114,7 @@ class ActivityTrackerTest {
         List<String> names = testActivityTracker.getActivityNames();
         assertTrue(names.isEmpty());
     }
-    
+
     @Test
     void testSortByNameNoChange() {
         testActivityTracker.addActivity(activity1);

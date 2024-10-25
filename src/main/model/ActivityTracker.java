@@ -3,30 +3,31 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents the tracker which holds a list of activities
 public class ActivityTracker {
     private List<Activity> activities; // list of activities
-    
-    /* 
+
+    /*
      * EFFECTS: creates a new ActivityTracker with an empty list of activities
-    */
+     */
     public ActivityTracker() {
         this.activities = new ArrayList<>();
     }
 
-    /* 
+    /*
      * MODIFIES: this
      * EFFECTS: adds activity to activities list
-    */
+     */
     public void addActivity(Activity activity) {
         if (!activities.contains(activity)) {
             activities.add(activity);
         }
     }
-    
-    /* 
+
+    /*
      * MODIFIES: this
      * EFFECTS: removes activity from activities list
-    */
+     */
     public void removeActivity(Activity activity) {
         if (!activities.contains(activity)) {
             throw new IllegalArgumentException("Activity not found");
@@ -34,10 +35,10 @@ public class ActivityTracker {
         activities.remove(activity);
     }
 
-    /* 
+    /*
      * REQUIRED: can not be empty string or null
      * EFFECTS: get activity from activities list by name
-    */
+     */
     public Activity getActivityByName(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Activity name cannot be null.");
@@ -49,15 +50,14 @@ public class ActivityTracker {
         }
         return null;
     }
-    
 
     public List<Activity> getActivities() {
         return activities;
     }
 
-    /*  
+    /*
      * EFFECTS: returns list of activity names
-    */
+     */
     public List<String> getActivityNames() {
         List<String> activityNames = new ArrayList<>();
         for (Activity activity : activities) {
@@ -66,33 +66,31 @@ public class ActivityTracker {
         return activityNames;
     }
 
-    /* 
+    /*
      * MODIFIES: this
      * EFFECTS: sorts activities list alphabetically;
-     *          if same first character, then sorts by next and so on
-    */
+     * if same first character, then sorts by next and so on
+     */
     public void sortByName() {
         activities.sort((a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName()));
     }
-    
 
-    /* 
+    /*
      * MODIFIES: this
      * EFFECTS: sorts actvities list in decreasing order of streak;
-     *          if same, positions don't swap
-    */
+     * if same, positions don't swap
+     */
     public void sortByStreak() {
         activities.sort((a1, a2) -> Integer.compare(a2.getStreak(), a1.getStreak()));
     }
-    
 
-    /* 
+    /*
      * MODIFIES: this
      * EFFECTS: sorts activities list in decreasing order of total time;
-     *          if same, positions don't swap
-    */
+     * if same, positions don't swap
+     */
     public void sortByTotalTime() {
         activities.sort((a1, a2) -> Integer.compare(a2.getTotalTime(), a1.getTotalTime()));
     }
-    
+
 }

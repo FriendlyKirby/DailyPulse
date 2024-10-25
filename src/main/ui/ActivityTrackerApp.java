@@ -29,11 +29,11 @@ public class ActivityTrackerApp {
     private void runActivityTracker() {
         boolean keepGoing = true;
         String command = null;
-    
+
         init();
-    
+
         System.out.println("Welcome to DailyPulse");
-    
+
         while (keepGoing) {
             displayMainMenu();
             command = input.nextLine().trim().toLowerCase();
@@ -43,10 +43,9 @@ public class ActivityTrackerApp {
                 mainMenuInput(command);
             }
         }
-    
+
         System.out.println("Make sure to keep on top of your goals!");
     }
-    
 
     // MODIFIES: this
     // EFFECTS: initializes activity tracker
@@ -153,7 +152,6 @@ public class ActivityTrackerApp {
         }
     }
 
-
     // MODIFIES: this
     // EFFECTS: takes activity name as input then proceeds you into a new menu
     private void doFindActivity() {
@@ -237,7 +235,7 @@ public class ActivityTrackerApp {
     private void doAddSession(Activity activity) {
         System.out.println("Type 'start' to begin the timer: ");
         String command = input.nextLine().toLowerCase();
-        
+
         if (command.equals("start")) {
             LocalDateTime startTime = LocalDateTime.now();
             System.out.println("Timer started at " + startTime);
@@ -346,7 +344,7 @@ public class ActivityTrackerApp {
         System.out.println("\tn -> Name");
         System.out.println("\ts -> Streak");
         System.out.println("\tt -> Total Time");
-        
+
         String command = input.nextLine().toLowerCase();
 
         switch (command) {
