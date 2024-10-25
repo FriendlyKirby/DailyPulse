@@ -1,0 +1,37 @@
+
+{
+    "activities": [
+      {
+        "name": "Running",
+        "streak": 3,
+        "totalTime": 5,
+        "nextSessionId": 3,
+        "sessions": [
+          {
+            "durationInHours": 2,
+            "sessionId": 1,
+            "date": "2024-10-20"
+          },
+          {
+            "durationInHours": 3,
+            "sessionId": 2,
+            "date": "2024-10-21"
+          }
+        ]
+      },
+      {
+        "name": "Reading",
+        "streak": 1,
+        "totalTime": 2,
+        "nextSessionId": 2,
+        "sessions": [
+          {
+            "durationInHours": 2,
+            "sessionId": 1,
+            "date": "2024-10-22"
+          }
+        ]
+      }
+    ]
+  }
+  

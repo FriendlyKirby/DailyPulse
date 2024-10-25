@@ -26,41 +26,79 @@ public class JsonReader {
     // EFFECTS: reads activity tracker from file and returns it;
     // throws IOException if an error occurs reading data from file
     public ActivityTracker read() throws IOException {
-        // stub
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseActivityTracker(jsonObject);
     }
 
     // EFFECTS: reads source file as string and returns it
     private String readFile(String source) throws IOException {
-        // stub
+        StringBuilder contentBuilder = new StringBuilder();
+
+        try (Stream<String> stream = Files.lines(Paths.get(source), StandardCharsets.UTF_8)) {
+            stream.forEach(s -> contentBuilder.append(s));
+        }
+
+        return contentBuilder.toString();
     }
 
     // EFFECTS: parses activity tracker from JSON object and returns it
     private ActivityTracker parseActivityTracker(JSONObject jsonObject) {
-        // stub
+        ActivityTracker tracker = new ActivityTracker();
+        addActivities(tracker, jsonObject);
+        return tracker;
     }
 
     // MODIFIES: tracker
     // EFFECTS: parses activities from JSON object and adds them to activity tracker
     private void addActivities(ActivityTracker tracker, JSONObject jsonObject) {
-        // stub
+        JSONArray jsonArray = jsonObject.getJSONArray("activities");
+        for (Object json : jsonArray) {
+            JSONObject nextActivity = (JSONObject) json;
+            addActivity(tracker, nextActivity);
+        }
     }
 
     // MODIFIES: tracker
     // EFFECTS: parses activity from JSON object and adds it to activity tracker
     private void addActivity(ActivityTracker tracker, JSONObject jsonObject) {
-        // stub
+        String name = jsonObject.getString("name");
+        int streak = jsonObject.getInt("streak");
+        int totalTime = jsonObject.getInt("totalTime");
+        int nextSessionId = jsonObject.getInt("nextSessionId");
+
+        Activity activity = new Activity(name);
+        activity.setStreak(streak);
+        activity.setTotalTime(totalTime);
+        activity.setNextSessionId(nextSessionId);
+
+        addSessions(activity, jsonObject);
+        tracker.addActivity(activity);
     }
 
     // MODIFIES: activity
     // EFFECTS: parses sessions from JSON object and adds them to activity
     private void addSessions(Activity activity, JSONObject jsonObject) {
-        // stub
+        JSONArray jsonArray = jsonObject.getJSONArray("sessions");
+        for (Object json : jsonArray) {
+            JSONObject nextSession = (JSONObject) json;
+            addSession(activity, nextSession);
+        }
     }
 
     // MODIFIES: activity
     // EFFECTS: parses session from JSON object and adds it to activity
     private void addSession(Activity activity, JSONObject jsonObject) {
-        // stub
+        int durationInHours = jsonObject.getInt("durationInHours");
+        int sessionId = jsonObject.getInt("sessionId");
+        String dateString = jsonObject.getString("date");
+        LocalDate date = LocalDate.parse(dateString);
+
+        Session session = new Session(durationInHours);
+        session.setId(sessionId);
+        session.setDate(date);
+
+        activity.getSessions().add(session);
     }
 
 }
