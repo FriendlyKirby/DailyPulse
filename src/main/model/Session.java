@@ -2,8 +2,12 @@ package model;
 
 import java.time.LocalDate;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a session having a duration (in hours), id, and date of creation
-public class Session {
+public class Session implements Writable{
     private int durationInHours; // tracks duration
     private int sessionId = 1; // tracks the current session id
     private LocalDate date; // the day the session was created
@@ -65,5 +69,15 @@ public class Session {
         return "Session ID: " + sessionId
                 + ", Duration: " + durationInHours + " hours"
                 + ", Date: " + date;
+    }
+
+    // credit to JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("durationInHours", durationInHours);
+        json.put("sessionId", sessionId);
+        json.put("date", date.toString());
+        return json;
     }
 }

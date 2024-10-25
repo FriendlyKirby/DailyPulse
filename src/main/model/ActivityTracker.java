@@ -3,8 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents the tracker which holds a list of activities
-public class ActivityTracker {
+public class ActivityTracker implements Writable {
     private List<Activity> activities; // list of activities
 
     /*
@@ -93,4 +98,22 @@ public class ActivityTracker {
         activities.sort((a1, a2) -> Integer.compare(a2.getTotalTime(), a1.getTotalTime()));
     }
 
+    // credit to JsonSerializationDemo
+    @Override
+        public JSONObject toJson() {
+            JSONObject json = new JSONObject();
+            json.put("activities", activitiesToJson());
+            return json;
+        }
+
+        // EFFECTS: returns activities in this tracker as a JSON array
+        private JSONArray activitiesToJson() {
+            JSONArray jsonArray = new JSONArray();
+
+            for (Activity activity : activities) {
+                jsonArray.put(activity.toJson());
+            }
+
+            return jsonArray;
+    }
 }

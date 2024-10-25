@@ -3,10 +3,15 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 import java.time.LocalDate;
 
 // Represents an activity having a name, list of sessions, streaks (in days), and total time
-public class Activity {
+public class Activity implements Writable {
     private String name; // activity name
     private List<Session> sessions; // list of sessions of activity
     private int streak = 0; // the current streak in days of activity
@@ -195,5 +200,28 @@ public class Activity {
         return "Activity Name: " + name + ", Sessions: " + sessions.size() + ", "
                 + "Streak: " + streak + " days, "
                 + "Total Time: " + totalTime + " hours";
+    }
+
+    // credit to JsonSerializationDemo
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("streak", streak);
+        json.put("totalTime", totalTime);
+        json.put("nextSessionId", nextSessionId);
+        json.put("sessions", sessionsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns sessions in this activity as a JSON array
+    private JSONArray sessionsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Session session : sessions) {
+            jsonArray.put(session.toJson());
+        }
+
+        return jsonArray;
     }
 }
