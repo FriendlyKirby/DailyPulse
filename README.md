@@ -45,3 +45,5 @@ all about.
 - As a user, I want to be able to see my streak for an activity.
 - As a user, I want to be able to see my overall time spent on an activity.
 - As a user, I want to be able to see a graph detailing my daily time spent on each activity.
+- As a user, I want to be able to save my activities and sessions to file (if I so choose)
+- As a user, I want to be able to be able to load activities and sessions from file (if I so choose)
