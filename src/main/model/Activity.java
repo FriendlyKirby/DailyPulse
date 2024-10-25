@@ -56,6 +56,15 @@ public class Activity implements Writable {
     }
 
     /*
+     * REQUIRES: nextSessionId >= 0
+     * MODIFIES: this
+     * EFFECTS: sets the nextSessionId of the activity
+     */
+    public void setNextSessionId(int nextSessionId) {
+        this.nextSessionId = nextSessionId;
+    }
+
+    /*
      * REQUIRES: new session must have a different date to previous ones
      * MODIFIES: this
      * EFFECTS: adds new session to activity if date has changed;

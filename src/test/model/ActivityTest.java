@@ -49,6 +49,16 @@ class ActivityTest {
     }
 
     @Test
+    void testSetNextSessionId() {
+        testActivity.setNextSessionId(5);
+        assertEquals(5, testActivity.getNextSessionId());
+        testActivity.setNextSessionId(2);
+        assertEquals(2, testActivity.getNextSessionId());
+        testActivity.setNextSessionId(0);
+        assertEquals(0, testActivity.getNextSessionId());
+    }
+
+    @Test
     void testAddSession() {
         Session session1 = new Session(5);
         testActivity.addSession(session1);
