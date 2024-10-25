@@ -35,6 +35,17 @@ class SessionTest {
     }
 
     @Test
+    void testSetDurationInHours() {
+        assertEquals(10, testSession.getDurationInHours());
+        testSession.setDurationInHours(5);
+        assertEquals(5, testSession.getDurationInHours());
+        testSession.setDurationInHours(15);
+        assertEquals(15, testSession.getDurationInHours());
+        testSession.setDurationInHours(0);
+        assertEquals(0, testSession.getDurationInHours());
+    }
+
+    @Test
     void testSetId() {
         assertEquals(1, testSession.getId());
         testSession.setId(2);

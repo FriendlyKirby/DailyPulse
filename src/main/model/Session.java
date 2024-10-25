@@ -32,6 +32,15 @@ public class Session implements Writable{
         this.durationInHours += durationInHours;
     }
 
+
+    /*
+     * REQUIRES: duration >= 0
+     * MODIFIES: this
+     * EFFECTS: sets the id for the session
+     */
+    public void setDurationInHours(int durationInHours) {
+        this.durationInHours = durationInHours;
+    }
     /*
      * REQUIRES: id >= 1
      * MODIFIES: this
