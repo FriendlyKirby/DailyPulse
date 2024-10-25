@@ -18,6 +18,7 @@ import persistence.JsonWriter;
 
 import java.util.Scanner;
 
+// credit to JsonSerializationDemo for save and load
 // Activity tracker application
 public class ActivityTrackerApp {
     private ActivityTracker activityTracker; // The activity tracker which is the list of activities
