@@ -7,15 +7,14 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents a session having a duration (in hours), id, and date of creation
-public class Session implements Writable{
+public class Session implements Writable {
     private double durationInHours; // tracks duration
-    private int sessionId = 1; // tracks the current session id
+    private int sessionId; // tracks the current session id
     private LocalDate date; // the day the session was created
 
     /*
-     * REQUIRES: durationInHours >= 0
+     * REQUIRES: durationInHours >= 0.0
      * EFFECTS: creates a new session with the given durationInHours;
-     * sessionId is equivalent to the number of days so far;
      * date is set to the current date.
      */
     public Session(double durationInHours) {
@@ -24,7 +23,7 @@ public class Session implements Writable{
     }
 
     /*
-     * REQUIRES: duration >= 0
+     * REQUIRES: durationInHours >= 0.0
      * MODIFIES: this
      * EFFECTS: adds time to durationInHours for the session
      */
@@ -32,17 +31,17 @@ public class Session implements Writable{
         this.durationInHours += durationInHours;
     }
 
-
     /*
-     * REQUIRES: duration >= 0
+     * REQUIRES: durationInHours >= 0.0
      * MODIFIES: this
      * EFFECTS: sets the durationInHours for the session
      */
     public void setDurationInHours(double durationInHours) {
         this.durationInHours = durationInHours;
     }
+
     /*
-     * REQUIRES: id >= 1
+     * REQUIRES: sessionId >= 1
      * MODIFIES: this
      * EFFECTS: sets the id for the session
      */
@@ -51,6 +50,7 @@ public class Session implements Writable{
     }
 
     /*
+     * REQUIRES: date is not null
      * MODIFIES: this
      * EFFECTS: sets the date for the session
      */
@@ -80,7 +80,8 @@ public class Session implements Writable{
                 + ", Date: " + date;
     }
 
-    // credit to JsonSerializationDemo
+    // Credit to JsonSerializationDemo
+    // Converts the session to a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

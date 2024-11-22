@@ -40,23 +40,23 @@ public class Activity implements Writable {
     /*
      * REQUIRES: streak >= 0
      * MODIFIES: this
-     * EFFECTS: sets the name of the activity
+     * EFFECTS: sets the streak of the activity
      */
     public void setStreak(int streak) {
         this.streak = streak;
     }
 
     /*
-     * REQUIRES: totalTime >= 0
+     * REQUIRES: totalTime >= 0.0
      * MODIFIES: this
      * EFFECTS: sets the totalTime of the activity
      */
-    public void setTotalTime(int totalTime) {
+    public void setTotalTime(double totalTime) {
         this.totalTime = totalTime;
     }
 
     /*
-     * REQUIRES: nextSessionId >= 0
+     * REQUIRES: nextSessionId >= 1
      * MODIFIES: this
      * EFFECTS: sets the nextSessionId of the activity
      */
@@ -65,89 +65,86 @@ public class Activity implements Writable {
     }
 
     /*
-     * REQUIRES: new session must have a different date to previous ones
+     * REQUIRES: session is not null
      * MODIFIES: this
-     * EFFECTS: adds new session to activity if date has changed;
+     * EFFECTS: adds new session to activity;
      * updates totalTime;
-     * adds 1 to streak if day is +1;
+     * updates streak based on session dates;
      * assigns the nextSessionId as the session id;
-     * updates the nextSessionId;
+     * increments nextSessionId.
      */
     public void addSession(Session session) {
-        if (!this.sessions.isEmpty()) {
-            Session latestSession = this.sessions.get(sessions.size() - 1);
+        // Assign session ID using nextSessionId
+        session.setId(nextSessionId);
+        nextSessionId++;
 
-            if (session.getDate().equals(latestSession.getDate())) {
-                latestSession.addDuration(session.getDurationInHours());
-                totalTime += session.getDurationInHours();
+        // Add session to the list
+        sessions.add(session);
 
-            } else if (session.getDate().equals(latestSession.getDate().plusDays(1))) {
-                session.setId(nextSessionId);
-                nextSessionId++;
-                this.sessions.add(session);
-                totalTime += session.getDurationInHours();
-                streak++;
+        // Update total time
+        totalTime += session.getDurationInHours();
 
+        // Update streak
+        updateStreak(session);
+    }
+
+    /*
+     * REQUIRES: session is not null
+     * MODIFIES: this
+     * EFFECTS: updates the streak based on the dates of the sessions
+     */
+    private void updateStreak(Session session) {
+        if (!sessions.isEmpty()) {
+            if (sessions.size() == 1) {
+                streak = 1;
             } else {
-                session.setId(nextSessionId);
-                nextSessionId++;
-                this.sessions.add(session);
-                totalTime += session.getDurationInHours();
+                Session previousSession = sessions.get(sessions.size() - 2);
+                LocalDate previousDate = previousSession.getDate();
+                LocalDate currentDate = session.getDate();
+
+                if (currentDate.equals(previousDate.plusDays(1))) {
+                    streak++;
+                } else if (!currentDate.equals(previousDate)) {
+                    streak = 1;
+                }
             }
-        } else {
-            addSessionElseCase(session);
         }
     }
 
     /*
-     * REQUIRES: List<Session> sessions != empty
+     * REQUIRES: session is not null
      * MODIFIES: this
-     * EFFECTS: sets session id as nextSessionId;
-     * increases nextSessionId by 1;
-     * adds this session to sessions;
-     * increases total time by sesion time;
-     * increases streak by 1
-     */
-    private void addSessionElseCase(Session session) {
-        session.setId(nextSessionId);
-        nextSessionId++;
-        this.sessions.add(session);
-        totalTime += session.getDurationInHours();
-        streak++;
-    }
-
-    /*
-     * REQUIRES: List<Session> sessions != empty
-     * MODIFIES: this
-     * EFFECTS: removes session from List<Session> sessions;
-     * updates total time;
-     * calls updateStreak();
+     * EFFECTS: removes session from sessions list;
+     * updates totalTime;
+     * recalculates the streak.
      */
     public void removeSession(Session session) {
         if (this.sessions.contains(session)) {
             this.sessions.remove(session);
             totalTime -= session.getDurationInHours();
-            updateStreak();
+            recalculateStreak();
         }
     }
 
     /*
      * MODIFIES: this
-     * EFFECTS: if previous days were consequtive, streak - 1;
-     * else no change.
+     * EFFECTS: recalculates the streak based on the current sessions list
      */
-    private void updateStreak() {
-        if (sessions.size() > 1) {
-            LocalDate latestSessionDay = this.sessions.get(sessions.size() - 1).getDate();
-            LocalDate secondLatestSessionDay = this.sessions.get(sessions.size() - 2).getDate();
-
-            if (latestSessionDay.equals(secondLatestSessionDay.plusDays(1))) {
-                streak -= 1;
-            }
-        } else if (sessions.size() == 1) {
+    private void recalculateStreak() {
+        streak = 0;
+        if (!sessions.isEmpty()) {
+            // Sort sessions by date
+            sessions.sort((s1, s2) -> s1.getDate().compareTo(s2.getDate()));
             streak = 1;
-        } else {
-            streak = 0;
+            for (int i = 1; i < sessions.size(); i++) {
+                LocalDate prevDate = sessions.get(i - 1).getDate();
+                LocalDate currDate = sessions.get(i).getDate();
+                if (currDate.equals(prevDate.plusDays(1))) {
+                    streak++;
+                } else {
+                    streak = 1;
+                }
+            }
         }
     }
 
@@ -160,6 +157,7 @@ public class Activity implements Writable {
     }
 
     /*
+     * REQUIRES: date is not null
      * EFFECTS: returns list of sessions from a specific date
      */
     public List<Session> getSessionsOnDate(LocalDate date) {
@@ -183,10 +181,11 @@ public class Activity implements Writable {
     }
 
     /*
-     * EFFECTS: returns the total time of sessions from a sepcific date
+     * REQUIRES: date is not null
+     * EFFECTS: returns the total time of sessions from a specific date
      */
-    public int getDateTotalTime(LocalDate date) {
-        int dateTotalTime = 0;
+    public double getDateTotalTime(LocalDate date) {
+        double dateTotalTime = 0.0;
 
         for (Session session : this.sessions) {
             if (session.getDate().equals(date)) {
@@ -208,10 +207,11 @@ public class Activity implements Writable {
     public String toString() {
         return "Activity Name: " + name + ", Sessions: " + sessions.size() + ", "
                 + "Streak: " + streak + " days, "
-                + "Total Time: " + totalTime + " hours";
+                + "Total Time: " + String.format("%.2f", totalTime) + " hours";
     }
 
-    // credit to JsonSerializationDemo
+    // Credit to JsonSerializationDemo
+    // Converts the activity to a JSON object
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

@@ -13,25 +13,32 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-// credit to JsonSerializationDemo
+// Credit to JsonSerializationDemo
 // Represents a reader that reads activity tracker from JSON data stored in file
 public class JsonReader {
     private String source;
 
-    // EFFECTS: constructs reader to read from source file
+    /*
+     * REQUIRES: source is not null
+     * EFFECTS: constructs reader to read from source file
+     */
     public JsonReader(String source) {
         this.source = source;
     }
 
-    // EFFECTS: reads activity tracker from file and returns it;
-    // throws IOException if an error occurs reading data from file
+    /*
+     * EFFECTS: reads activity tracker from file and returns it;
+     * throws IOException if an error occurs reading data from file
+     */
     public ActivityTracker read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseActivityTracker(jsonObject);
     }
 
-    // EFFECTS: reads source file as string and returns it
+    /*
+     * EFFECTS: reads source file as string and returns it
+     */
     private String readFile(String source) throws IOException {
         StringBuilder contentBuilder = new StringBuilder();
 
@@ -42,15 +49,19 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses activity tracker from JSON object and returns it
+    /*
+     * EFFECTS: parses activity tracker from JSON object and returns it
+     */
     private ActivityTracker parseActivityTracker(JSONObject jsonObject) {
         ActivityTracker tracker = new ActivityTracker();
         addActivities(tracker, jsonObject);
         return tracker;
     }
 
-    // MODIFIES: tracker
-    // EFFECTS: parses activities from JSON object and adds them to activity tracker
+    /*
+     * MODIFIES: tracker
+     * EFFECTS: parses activities from JSON object and adds them to activity tracker
+     */
     private void addActivities(ActivityTracker tracker, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("activities");
         for (Object json : jsonArray) {
@@ -59,12 +70,14 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: tracker
-    // EFFECTS: parses activity from JSON object and adds it to activity tracker
+    /*
+     * MODIFIES: tracker
+     * EFFECTS: parses activity from JSON object and adds it to activity tracker
+     */
     private void addActivity(ActivityTracker tracker, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
         int streak = jsonObject.getInt("streak");
-        int totalTime = jsonObject.getInt("totalTime");
+        double totalTime = jsonObject.getDouble("totalTime"); // Use getDouble()
         int nextSessionId = jsonObject.getInt("nextSessionId");
 
         Activity activity = new Activity(name);
@@ -76,8 +89,10 @@ public class JsonReader {
         tracker.addActivity(activity);
     }
 
-    // MODIFIES: activity
-    // EFFECTS: parses sessions from JSON object and adds them to activity
+    /*
+     * MODIFIES: activity
+     * EFFECTS: parses sessions from JSON object and adds them to activity
+     */
     private void addSessions(Activity activity, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("sessions");
         for (Object json : jsonArray) {
@@ -86,10 +101,12 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: activity
-    // EFFECTS: parses session from JSON object and adds it to activity
+    /*
+     * MODIFIES: activity
+     * EFFECTS: parses session from JSON object and adds it to activity
+     */
     private void addSession(Activity activity, JSONObject jsonObject) {
-        int durationInHours = jsonObject.getInt("durationInHours");
+        double durationInHours = jsonObject.getDouble("durationInHours"); // Use getDouble()
         int sessionId = jsonObject.getInt("sessionId");
         String dateString = jsonObject.getString("date");
         LocalDate date = LocalDate.parse(dateString);
@@ -100,5 +117,4 @@ public class JsonReader {
 
         activity.getSessions().add(session);
     }
-
 }

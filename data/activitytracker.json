@@ -1,20 +1,388 @@
-{"activities": [
-    {
-        "sessions": [{
-            "date": "2024-10-24",
-            "durationInHours": 0,
-            "sessionId": 1
-        }],
-        "nextSessionId": 2,
-        "totalTime": 0,
-        "name": "Running",
-        "streak": 1
-    },
-    {
-        "sessions": [],
-        "nextSessionId": 1,
-        "totalTime": 0,
-        "name": "Drawing",
-        "streak": 0
-    }
-]}
+{
+    "activities": [
+        {
+            "name": "Running",
+            "streak": 7,
+            "totalTime": 14.2,
+            "nextSessionId": 8,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 1.2,
+                    "date": "2024-11-15"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 2.5,
+                    "date": "2024-11-16"
+                },
+                {
+                    "sessionId": 3,
+                    "durationInHours": 1.0,
+                    "date": "2024-11-17"
+                },
+                {
+                    "sessionId": 4,
+                    "durationInHours": 2.2,
+                    "date": "2024-11-18"
+                },
+                {
+                    "sessionId": 5,
+                    "durationInHours": 1.8,
+                    "date": "2024-11-19"
+                },
+                {
+                    "sessionId": 6,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 7,
+                    "durationInHours": 3.5,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Drawing",
+            "streak": 3,
+            "totalTime": 5.7,
+            "nextSessionId": 4,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 1.7,
+                    "date": "2024-11-19"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 3,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Reading",
+            "streak": 5,
+            "totalTime": 7.9,
+            "nextSessionId": 6,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 1.2,
+                    "date": "2024-11-17"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 1.8,
+                    "date": "2024-11-18"
+                },
+                {
+                    "sessionId": 3,
+                    "durationInHours": 1.5,
+                    "date": "2024-11-19"
+                },
+                {
+                    "sessionId": 4,
+                    "durationInHours": 1.0,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 5,
+                    "durationInHours": 2.4,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Meditation",
+            "streak": 4,
+            "totalTime": 3.6,
+            "nextSessionId": 5,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 0.8,
+                    "date": "2024-11-18"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 0.9,
+                    "date": "2024-11-19"
+                },
+                {
+                    "sessionId": 3,
+                    "durationInHours": 0.7,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 4,
+                    "durationInHours": 1.2,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Coding",
+            "streak": 2,
+            "totalTime": 9.1,
+            "nextSessionId": 4,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 4.6,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 4.5,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Guitar Practice",
+            "streak": 3,
+            "totalTime": 6.3,
+            "nextSessionId": 4,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-19"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 2.3,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 3,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Yoga",
+            "streak": 1,
+            "totalTime": 1.5,
+            "nextSessionId": 2,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 1.5,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Cooking",
+            "streak": 2,
+            "totalTime": 3.7,
+            "nextSessionId": 3,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 1.9,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 1.8,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Photography",
+            "streak": 0,
+            "totalTime": 0,
+            "nextSessionId": 1,
+            "sessions": []
+        },
+        {
+            "name": "Language Learning",
+            "streak": 6,
+            "totalTime": 9.3,
+            "nextSessionId": 7,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 1.5,
+                    "date": "2024-11-16"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 1.2,
+                    "date": "2024-11-17"
+                },
+                {
+                    "sessionId": 3,
+                    "durationInHours": 1.6,
+                    "date": "2024-11-18"
+                },
+                {
+                    "sessionId": 4,
+                    "durationInHours": 1.4,
+                    "date": "2024-11-19"
+                },
+                {
+                    "sessionId": 5,
+                    "durationInHours": 1.0,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 6,
+                    "durationInHours": 2.6,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Swimming",
+            "streak": 2,
+            "totalTime": 4.0,
+            "nextSessionId": 3,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Cycling",
+            "streak": 4,
+            "totalTime": 8.5,
+            "nextSessionId": 5,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-18"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 1.5,
+                    "date": "2024-11-19"
+                },
+                {
+                    "sessionId": 3,
+                    "durationInHours": 2.5,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 4,
+                    "durationInHours": 2.5,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Painting",
+            "streak": 1,
+            "totalTime": 1.8,
+            "nextSessionId": 2,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 1.8,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Piano Practice",
+            "streak": 3,
+            "totalTime": 6.0,
+            "nextSessionId": 4,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-19"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 3,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Gardening",
+            "streak": 0,
+            "totalTime": 0,
+            "nextSessionId": 1,
+            "sessions": []
+        },
+        {
+            "name": "Blogging",
+            "streak": 2,
+            "totalTime": 3.5,
+            "nextSessionId": 3,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 1.5,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-21"
+                }
+            ]
+        },
+        {
+            "name": "Workout",
+            "streak": 5,
+            "totalTime": 10.0,
+            "nextSessionId": 6,
+            "sessions": [
+                {
+                    "sessionId": 1,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-17"
+                },
+                {
+                    "sessionId": 2,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-18"
+                },
+                {
+                    "sessionId": 3,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-19"
+                },
+                {
+                    "sessionId": 4,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-20"
+                },
+                {
+                    "sessionId": 5,
+                    "durationInHours": 2.0,
+                    "date": "2024-11-21"
+                }
+            ]
+        }
+    ]
+}

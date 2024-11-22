@@ -20,8 +20,9 @@ public class ActivityTracker implements Writable {
     }
 
     /*
+     * REQUIRES: activity is not null
      * MODIFIES: this
-     * EFFECTS: adds activity to activities list
+     * EFFECTS: adds activity to activities list if it's not already present
      */
     public void addActivity(Activity activity) {
         if (!activities.contains(activity)) {
@@ -30,6 +31,7 @@ public class ActivityTracker implements Writable {
     }
 
     /*
+     * REQUIRES: activity is not null and exists in the list
      * MODIFIES: this
      * EFFECTS: removes activity from activities list
      */
@@ -41,8 +43,9 @@ public class ActivityTracker implements Writable {
     }
 
     /*
-     * REQUIRED: can not be empty string or null
-     * EFFECTS: get activity from activities list by name
+     * REQUIRES: name is not null or empty
+     * EFFECTS: gets activity from activities list by name;
+     * returns null if not found
      */
     public Activity getActivityByName(String name) {
         if (name == null) {
@@ -82,7 +85,7 @@ public class ActivityTracker implements Writable {
 
     /*
      * MODIFIES: this
-     * EFFECTS: sorts actvities list in decreasing order of streak;
+     * EFFECTS: sorts activities list in decreasing order of streak;
      * if same, positions don't swap
      */
     public void sortByStreak() {
@@ -98,22 +101,23 @@ public class ActivityTracker implements Writable {
         activities.sort((a1, a2) -> Double.compare(a2.getTotalTime(), a1.getTotalTime()));
     }
 
-    // credit to JsonSerializationDemo
+    // Credit to JsonSerializationDemo
+    // Converts the activity tracker to a JSON object
     @Override
-        public JSONObject toJson() {
-            JSONObject json = new JSONObject();
-            json.put("activities", activitiesToJson());
-            return json;
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("activities", activitiesToJson());
+        return json;
+    }
+
+    // EFFECTS: returns activities in this tracker as a JSON array
+    private JSONArray activitiesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Activity activity : activities) {
+            jsonArray.put(activity.toJson());
         }
 
-        // EFFECTS: returns activities in this tracker as a JSON array
-        private JSONArray activitiesToJson() {
-            JSONArray jsonArray = new JSONArray();
-
-            for (Activity activity : activities) {
-                jsonArray.put(activity.toJson());
-            }
-
-            return jsonArray;
+        return jsonArray;
     }
 }
