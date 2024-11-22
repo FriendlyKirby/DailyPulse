@@ -50,28 +50,4 @@ all about.
 
 ## Citations
 - https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
-    - persitence is modeled after this
-
-# Instructions for End User
-- You can generate the first required action related to the user story "adding multiple sessions to an activity" by:
-    - Selecting an activity from the list displayed in the main window of the application.
-    - Clicking on the "View Activity" button, or double-clicking the activity name in the list to open the Activity Details window.
-    - In the Activity Details window, clicking on the "Start Timer" button to begin recording a new session.
-    - When you are finished with your session, clicking on the "Stop Timer" button. The session will be automatically added to the activity with the duration recorded.
-- You can generate the second required action related to the user story "adding multiple sessions to an activity" by:
-    - In the Activity Details window, clicking on the "Add Session" button (if available) to manually add a session.
-    - Entering the duration of the session and the date when prompted.
-    - Confirming your input to add the session to the activity.
-- You can locate my visual component by:
-    - Opening the Activity Details window for the desired activity.
-    - Clicking on the "View Graph" button.
-    - A new window will appear showing a bar graph that visualizes the time you have spent on the activity each day.
-- You can save the state of my application by:
-    - In the main window of the application, clicking on the "Save" button.
-    - A file chooser dialog will appear. Select the location where you want to save your data and provide a file name.
-    - Confirming the save operation. A confirmation message will appear indicating that the activity tracker has been saved.
-- You can reload the state of my application by:
-    - In the main window, clicking on the "Load" button.
-    - A file chooser dialog will appear. Navigate to the location of your previously saved activity tracker file.
-    - Selecting the file and confirming the load operation.
-    - The application will load your activities and sessions from the file, and the main window will update to reflect the loaded data.
+    - persitence is modeled after
