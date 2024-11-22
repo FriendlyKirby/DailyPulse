@@ -55,21 +55,31 @@ public class GraphFrame extends JFrame {
             int width = getWidth() - 2 * padding - labelPadding;
             int height = getHeight() - 2 * padding - labelPadding;
 
-            // Draw background
+            drawBackground(g, padding, labelPadding, width, height);
+            drawYAxis(g, padding, labelPadding, numYDivisions, maxDuration, width, height);
+            drawXAxisAndBars(g, padding, labelPadding, maxDuration, width, height);
+        }
+
+        private void drawBackground(Graphics g, int padding, int labelPadding, int width, int height) {
             g.setColor(Color.WHITE);
             g.fillRect(padding + labelPadding, padding, width, height);
             g.setColor(Color.BLACK);
+        }
 
-            // Draw y-axis lines and labels
+        private void drawYAxis(Graphics g, int padding, int labelPadding, int numYDivisions,
+                double maxDuration, int width, int height) {
             for (int i = 0; i <= numYDivisions; i++) {
                 int y = padding + (i * height / numYDivisions);
                 g.drawLine(padding + labelPadding, y, getWidth() - padding, y);
-                String yLabel = String.format("%.1f", maxDuration - (i * maxDuration / numYDivisions));
-                int labelWidth = g.getFontMetrics().stringWidth(yLabel);
-                g.drawString(yLabel, padding + labelPadding - labelWidth - 5, y + (g.getFontMetrics().getHeight() / 2) - 3);
+                String labelY = String.format("%.1f", maxDuration - (i * maxDuration / numYDivisions));
+                int labelWidth = g.getFontMetrics().stringWidth(labelY);
+                g.drawString(labelY, padding + labelPadding - labelWidth - 5,
+                        y + (g.getFontMetrics().getHeight() / 2) - 3);
             }
+        }
 
-            // Draw x-axis labels and bars
+        private void drawXAxisAndBars(Graphics g, int padding, int labelPadding,
+                double maxDuration, int width, int height) {
             int barWidth = width / dateTimeMap.size();
             int index = 0;
 
@@ -86,9 +96,10 @@ public class GraphFrame extends JFrame {
 
                 // Draw date label
                 g.setColor(Color.BLACK);
-                String xLabel = date.toString();
-                int labelWidth = g.getFontMetrics().stringWidth(xLabel);
-                g.drawString(xLabel, x + (barWidth - 10) / 2 - labelWidth / 2, padding + height + g.getFontMetrics().getHeight() + 3);
+                String labelX = date.toString();
+                int labelWidth = g.getFontMetrics().stringWidth(labelX);
+                g.drawString(labelX, x + (barWidth - 10) / 2 - labelWidth / 2,
+                        padding + height + g.getFontMetrics().getHeight() + 3);
 
                 index++;
             }

@@ -17,8 +17,17 @@ public class ActivityTrackerGUI extends JFrame {
     private ActivityTracker activityTracker;
     private DefaultListModel<String> activityListModel;
     private JList<String> activityList;
+    private JScrollPane activityScrollPane;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+
+    // Buttons and components
+    private JButton addButton;
+    private JButton removeButton;
+    private JButton viewButton;
+    private JButton saveButton;
+    private JButton loadButton;
+    private JComboBox<String> sortComboBox;
 
     public ActivityTrackerGUI() {
         super("DailyPulse Activity Tracker");
@@ -33,41 +42,45 @@ public class ActivityTrackerGUI extends JFrame {
     }
 
     private void initializeComponents() {
-        // Set layout
         setLayout(new BorderLayout());
 
-        // Initialize activity list model and list
+        initializeActivityList();
+        add(activityScrollPane, BorderLayout.CENTER);
+
+        createButtons();
+        addButtonPanel();
+
+        addDoubleClickListener();
+    }
+
+    private void initializeActivityList() {
         activityListModel = new DefaultListModel<>();
         activityList = new JList<>(activityListModel);
         activityList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JScrollPane activityScrollPane = new JScrollPane(activityList);
+        activityScrollPane = new JScrollPane(activityList);
 
-        // Load activities into the list
         loadActivitiesIntoList();
+    }
 
-        // Add components to the frame
-        add(activityScrollPane, BorderLayout.CENTER);
+    private void createButtons() {
+        addButton = new JButton("Add Activity");
+        removeButton = new JButton("Remove Activity");
+        viewButton = new JButton("View Activity");
+        saveButton = new JButton("Save");
+        loadButton = new JButton("Load");
 
-        // Create buttons
-        JButton addButton = new JButton("Add Activity");
-        JButton removeButton = new JButton("Remove Activity");
-        JButton viewButton = new JButton("View Activity");
-        JButton saveButton = new JButton("Save");
-        JButton loadButton = new JButton("Load");
-
-        // Add action listeners
         addButton.addActionListener(e -> addActivity());
         removeButton.addActionListener(e -> removeActivity());
         viewButton.addActionListener(e -> viewActivity());
         saveButton.addActionListener(e -> saveActivityTracker());
         loadButton.addActionListener(e -> loadActivityTracker());
 
-        // Sorting options
-        String[] sortOptions = {"Name", "Streak", "Total Time"};
-        JComboBox<String> sortComboBox = new JComboBox<>(sortOptions);
+        String[] sortOptions = { "Name", "Streak", "Total Time" };
+        sortComboBox = new JComboBox<>(sortOptions);
         sortComboBox.addActionListener(e -> sortActivities(sortComboBox.getSelectedItem().toString()));
+    }
 
-        // Create a panel for buttons
+    private void addButtonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addButton);
         buttonPanel.add(removeButton);
@@ -78,8 +91,9 @@ public class ActivityTrackerGUI extends JFrame {
         buttonPanel.add(sortComboBox);
 
         add(buttonPanel, BorderLayout.SOUTH);
+    }
 
-        // Add double-click listener to activity list
+    private void addDoubleClickListener() {
         activityList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 if (evt.getClickCount() == 2) {
@@ -121,8 +135,7 @@ public class ActivityTrackerGUI extends JFrame {
                     this,
                     "Are you sure you want to remove the activity \"" + activityName + "\"?",
                     "Confirm Removal",
-                    JOptionPane.YES_NO_OPTION
-            );
+                    JOptionPane.YES_NO_OPTION);
 
             if (response == JOptionPane.YES_OPTION) {
                 // Proceed with removal

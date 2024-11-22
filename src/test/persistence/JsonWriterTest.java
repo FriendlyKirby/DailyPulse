@@ -45,41 +45,53 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterGeneralActivityTracker() {
         try {
-            ActivityTracker tracker = new ActivityTracker();
-
-            Activity activity = new Activity("Running");
-            tracker.addActivity(activity);
-
-            // Use addSession() to ensure proper handling
-            Session session1 = new Session(2.0);
-            session1.setDate(LocalDate.parse("2023-10-20"));
-            activity.addSession(session1);
-
-            Session session2 = new Session(3.0);
-            session2.setDate(LocalDate.parse("2023-10-21"));
-            activity.addSession(session2);
-
-            JsonWriter writer = new JsonWriter("./data/testWriterGeneralActivityTracker.json");
-            writer.open();
-            writer.write(tracker);
-            writer.close();
-
-            // Read back the data and verify
-            JsonReader reader = new JsonReader("./data/testWriterGeneralActivityTracker.json");
-            tracker = reader.read();
-            List<Activity> activities = tracker.getActivities();
-            assertEquals(1, activities.size());
-            Activity readActivity = activities.get(0);
-            checkActivity("Running", 2, 5.0, readActivity);
-
-            List<Session> readSessions = readActivity.getSessions();
-            assertEquals(2, readSessions.size());
-            checkSession(2.0, 1, "2023-10-20", readSessions.get(0));
-            checkSession(3.0, 2, "2023-10-21", readSessions.get(1));
-
+            ActivityTracker tracker = createActivityTracker();
+            writeTrackerToFile(tracker, "./data/testWriterGeneralActivityTracker.json");
+            ActivityTracker readTracker = readTrackerFromFile("./data/testWriterGeneralActivityTracker.json");
+            verifyTracker(readTracker);
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }
+    }
+
+    private ActivityTracker createActivityTracker() {
+        ActivityTracker tracker = new ActivityTracker();
+        Activity activity = new Activity("Running");
+        tracker.addActivity(activity);
+
+        Session session1 = new Session(2.0);
+        session1.setDate(LocalDate.parse("2023-10-20"));
+        activity.addSession(session1);
+
+        Session session2 = new Session(3.0);
+        session2.setDate(LocalDate.parse("2023-10-21"));
+        activity.addSession(session2);
+
+        return tracker;
+    }
+
+    private void writeTrackerToFile(ActivityTracker tracker, String filePath) throws IOException {
+        JsonWriter writer = new JsonWriter(filePath);
+        writer.open();
+        writer.write(tracker);
+        writer.close();
+    }
+
+    private ActivityTracker readTrackerFromFile(String filePath) throws IOException {
+        JsonReader reader = new JsonReader(filePath);
+        return reader.read();
+    }
+
+    private void verifyTracker(ActivityTracker tracker) {
+        List<Activity> activities = tracker.getActivities();
+        assertEquals(1, activities.size());
+        Activity readActivity = activities.get(0);
+        checkActivity("Running", 2, 5.0, readActivity);
+
+        List<Session> readSessions = readActivity.getSessions();
+        assertEquals(2, readSessions.size());
+        checkSession(2.0, 1, "2023-10-20", readSessions.get(0));
+        checkSession(3.0, 2, "2023-10-21", readSessions.get(1));
     }
 
     @Test

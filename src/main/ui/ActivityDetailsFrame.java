@@ -44,7 +44,12 @@ public class ActivityDetailsFrame extends JFrame {
     private void initializeComponents() {
         setLayout(new BorderLayout());
 
-        // Labels for total time and streak
+        addInfoPanel();
+        addSessionList();
+        addButtonPanel();
+    }
+
+    private void addInfoPanel() {
         totalTimeLabel = new JLabel("Total Time: " + String.format("%.2f", activity.getTotalTime()) + " hours");
         streakLabel = new JLabel("Streak: " + activity.getStreak() + " days");
 
@@ -54,16 +59,18 @@ public class ActivityDetailsFrame extends JFrame {
         infoPanel.add(streakLabel);
 
         add(infoPanel, BorderLayout.NORTH);
+    }
 
-        // Session list
+    private void addSessionList() {
         sessionListModel = new DefaultListModel<>();
         sessionList = new JList<>(sessionListModel);
         loadSessionsIntoList();
         JScrollPane sessionScrollPane = new JScrollPane(sessionList);
 
         add(sessionScrollPane, BorderLayout.CENTER);
+    }
 
-        // Buttons
+    private void addButtonPanel() {
         startTimerButton = new JButton("Start Timer");
         stopTimerButton = new JButton("Stop Timer");
         stopTimerButton.setEnabled(false); // Initially disabled
@@ -110,8 +117,8 @@ public class ActivityDetailsFrame extends JFrame {
             Duration duration = Duration.between(startTime, endTime);
             double durationInHours = duration.toSeconds() / 3600.0;
 
-            JOptionPane.showMessageDialog(this, "Timer stopped at " + endTime.toString() +
-                    "\nTotal time: " + String.format("%.2f", durationInHours) + " hours");
+            JOptionPane.showMessageDialog(this, "Timer stopped at " + endTime.toString()
+                    + "\nTotal time: " + String.format("%.2f", durationInHours) + " hours");
 
             // Create a new session
             Session session = new Session(durationInHours);
@@ -144,8 +151,7 @@ public class ActivityDetailsFrame extends JFrame {
         String newName = JOptionPane.showInputDialog(
                 this,
                 "Enter new name for the activity:",
-                activity.getName()
-        );
+                activity.getName());
 
         if (newName != null && !newName.trim().isEmpty()) {
             // Check if the name already exists in the tracker
@@ -178,8 +184,7 @@ public class ActivityDetailsFrame extends JFrame {
                     this,
                     "Are you sure you want to delete this session?",
                     "Confirm Deletion",
-                    JOptionPane.YES_NO_OPTION
-            );
+                    JOptionPane.YES_NO_OPTION);
 
             if (response == JOptionPane.YES_OPTION) {
                 activity.removeSession(session);

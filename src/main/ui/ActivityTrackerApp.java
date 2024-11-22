@@ -75,7 +75,6 @@ public class ActivityTrackerApp {
         System.out.println("\tload -> Load activities from file");
         System.out.println("\tq -> Quit");
     }
-    
 
     // MODIFIES: this
     // EFFECTS: takes in input prompt from user and proceeds with action
@@ -104,7 +103,6 @@ public class ActivityTrackerApp {
                 break;
         }
     }
-    
 
     // EFFECTS: displays a lit of the activity names
     private void doViewActivities() {
