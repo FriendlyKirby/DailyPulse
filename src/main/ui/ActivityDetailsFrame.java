@@ -9,6 +9,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+// Referenced CPSC210 GUI Projects
 public class ActivityDetailsFrame extends JFrame {
 
     private Activity activity;
@@ -18,7 +19,7 @@ public class ActivityDetailsFrame extends JFrame {
     private JButton startTimerButton;
     private JButton stopTimerButton;
     private LocalDateTime startTime;
-    private JButton viewGraphButton; // Added semicolon here
+    private JButton viewGraphButton;
 
     public ActivityDetailsFrame(Activity activity) {
         super(activity.getName());
@@ -96,7 +97,7 @@ public class ActivityDetailsFrame extends JFrame {
             JOptionPane.showMessageDialog(this, "Timer stopped at " + endTime.toString() +
                     "\nTotal time: " + String.format("%.2f", durationInHours) + " hours");
 
-            // Create a new session with precise duration
+            // Create a new session
             Session session = new Session(durationInHours);
             session.setDate(LocalDate.now());
             activity.addSession(session);
