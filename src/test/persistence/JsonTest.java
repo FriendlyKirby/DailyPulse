@@ -1,21 +1,20 @@
 package persistence;
 
-import model.Session;
 import model.Activity;
-import java.time.LocalDate;
+import model.Session;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-// credit to JsonSerializationDemo
 public class JsonTest {
-    protected void checkSession(int duration, int id, String date, Session session) {
-        assertEquals(duration, session.getDurationInHours());
-        assertEquals(id, session.getId());
-        assertEquals(LocalDate.parse(date), session.getDate());
-    }
-
-    protected void checkActivity(String name, int streak, int totalTime, Activity activity) {
+    protected void checkActivity(String name, int streak, double totalTime, Activity activity) {
         assertEquals(name, activity.getName());
         assertEquals(streak, activity.getStreak());
-        assertEquals(totalTime, activity.getTotalTime());
+        assertEquals(totalTime, activity.getTotalTime(), 0.001);
+    }
+
+    protected void checkSession(double durationInHours, int sessionId, String date, Session session) {
+        assertEquals(durationInHours, session.getDurationInHours(), 0.001);
+        assertEquals(sessionId, session.getId());
+        assertEquals(date, session.getDate().toString());
     }
 }

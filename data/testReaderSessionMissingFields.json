@@ -1,0 +1,17 @@
+{
+    "activities": [
+      {
+        "name": "Swimming",
+        "streak": 1,
+        "totalTime": 2.0,
+        "nextSessionId": 2,
+        "sessions": [
+          {
+            "sessionId": 1,
+            "date": "2023-10-24"
+          }
+        ]
+      }
+    ]
+  }
+  

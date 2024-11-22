@@ -5,6 +5,7 @@ import model.Activity;
 import model.ActivityTracker;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -32,8 +33,12 @@ public class JsonReader {
      */
     public ActivityTracker read() throws IOException {
         String jsonData = readFile(source);
-        JSONObject jsonObject = new JSONObject(jsonData);
-        return parseActivityTracker(jsonObject);
+        try {
+            JSONObject jsonObject = new JSONObject(jsonData);
+            return parseActivityTracker(jsonObject);
+        } catch (JSONException e) {
+            throw new IOException("Failed to parse JSON data", e);
+        }
     }
 
     /*

@@ -1,0 +1,12 @@
+{
+    "activities": [
+      {
+        "name": "Meditation",
+        "streak": 0,
+        "totalTime": 0.0,
+        "nextSessionId": 1,
+        "sessions": []
+      }
+    ]
+  }
+  
