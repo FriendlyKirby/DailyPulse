@@ -339,7 +339,7 @@ public class ActivityTrackerApp {
         Map<LocalDate, Integer> dateTimeMap = new TreeMap<>();
         for (Session session : activity.getSessions()) {
             LocalDate date = session.getDate();
-            int duration = session.getDurationInHours();
+            int duration = (int) session.getDurationInHours();
             dateTimeMap.put(date, dateTimeMap.getOrDefault(date, 0) + duration);
         }
 

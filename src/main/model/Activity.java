@@ -15,7 +15,7 @@ public class Activity implements Writable {
     private String name; // activity name
     private List<Session> sessions; // list of sessions of activity
     private int streak = 0; // the current streak in days of activity
-    private int totalTime = 0; // the total time in hours on activity
+    private double totalTime = 0.0; // the total time in hours on activity
     private int nextSessionId = 1; // the next session id
 
     /*
@@ -178,7 +178,7 @@ public class Activity implements Writable {
         return streak;
     }
 
-    public int getTotalTime() {
+    public double getTotalTime() {
         return totalTime;
     }
 

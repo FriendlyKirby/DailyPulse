@@ -95,7 +95,7 @@ public class ActivityTracker implements Writable {
      * if same, positions don't swap
      */
     public void sortByTotalTime() {
-        activities.sort((a1, a2) -> Integer.compare(a2.getTotalTime(), a1.getTotalTime()));
+        activities.sort((a1, a2) -> Double.compare(a2.getTotalTime(), a1.getTotalTime()));
     }
 
     // credit to JsonSerializationDemo

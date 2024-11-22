@@ -8,7 +8,7 @@ import persistence.Writable;
 
 // Represents a session having a duration (in hours), id, and date of creation
 public class Session implements Writable{
-    private int durationInHours; // tracks duration
+    private double durationInHours; // tracks duration
     private int sessionId = 1; // tracks the current session id
     private LocalDate date; // the day the session was created
 
@@ -18,7 +18,7 @@ public class Session implements Writable{
      * sessionId is equivalent to the number of days so far;
      * date is set to the current date.
      */
-    public Session(int durationInHours) {
+    public Session(double durationInHours) {
         this.durationInHours = durationInHours;
         this.date = LocalDate.now();
     }
@@ -28,7 +28,7 @@ public class Session implements Writable{
      * MODIFIES: this
      * EFFECTS: adds time to durationInHours for the session
      */
-    public void addDuration(int durationInHours) {
+    public void addDuration(double durationInHours) {
         this.durationInHours += durationInHours;
     }
 
@@ -38,7 +38,7 @@ public class Session implements Writable{
      * MODIFIES: this
      * EFFECTS: sets the durationInHours for the session
      */
-    public void setDurationInHours(int durationInHours) {
+    public void setDurationInHours(double durationInHours) {
         this.durationInHours = durationInHours;
     }
     /*
@@ -58,7 +58,7 @@ public class Session implements Writable{
         this.date = date;
     }
 
-    public int getDurationInHours() {
+    public double getDurationInHours() {
         return durationInHours;
     }
 
@@ -76,7 +76,7 @@ public class Session implements Writable{
     @Override
     public String toString() {
         return "Session ID: " + sessionId
-                + ", Duration: " + durationInHours + " hours"
+                + ", Duration: " + String.format("%.2f", durationInHours) + " hours"
                 + ", Date: " + date;
     }
 
