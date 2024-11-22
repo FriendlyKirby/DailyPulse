@@ -110,15 +110,27 @@ public class ActivityTrackerGUI extends JFrame {
     private void removeActivity() {
         int selectedIndex = activityList.getSelectedIndex();
         if (selectedIndex != -1) {
-            String name = activityListModel.getElementAt(selectedIndex);
-            Activity activity = activityTracker.getActivityByName(name);
-            activityTracker.removeActivity(activity);
-            activityListModel.remove(selectedIndex);
+            String activityName = activityListModel.getElementAt(selectedIndex);
+    
+            // Show confirmation dialog
+            int response = JOptionPane.showConfirmDialog(
+                    this,
+                    "Are you sure you want to remove the activity \"" + activityName + "\"?",
+                    "Confirm Removal",
+                    JOptionPane.YES_NO_OPTION
+            );
+    
+            if (response == JOptionPane.YES_OPTION) {
+                // Proceed with removal
+                Activity activity = activityTracker.getActivityByName(activityName);
+                activityTracker.removeActivity(activity);
+                activityListModel.remove(selectedIndex);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Please select an activity to remove.");
         }
     }
-
+    
     private void viewActivity() {
         String name = activityList.getSelectedValue();
         if (name != null) {
