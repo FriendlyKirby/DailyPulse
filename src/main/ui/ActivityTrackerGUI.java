@@ -99,10 +99,14 @@ public class ActivityTrackerGUI extends JFrame {
     private void addActivity() {
         String name = JOptionPane.showInputDialog(this, "Enter the name of the new activity:");
         if (name != null && !name.trim().isEmpty()) {
-            Activity activity = new Activity(name.trim());
-            activityTracker.addActivity(activity);
-            activityListModel.addElement(activity.getName());
-        } else {
+            if (activityTracker.getActivityByName(name.trim()) == null) {
+                Activity activity = new Activity(name.trim());
+                activityTracker.addActivity(activity);
+                activityListModel.addElement(activity.getName());
+            } else {
+                JOptionPane.showMessageDialog(this, "An activity with that name already exists.");
+            }
+        } else if (name != null) {
             JOptionPane.showMessageDialog(this, "Activity name cannot be empty.");
         }
     }
@@ -111,7 +115,7 @@ public class ActivityTrackerGUI extends JFrame {
         int selectedIndex = activityList.getSelectedIndex();
         if (selectedIndex != -1) {
             String activityName = activityListModel.getElementAt(selectedIndex);
-    
+
             // Show confirmation dialog
             int response = JOptionPane.showConfirmDialog(
                     this,
@@ -119,7 +123,7 @@ public class ActivityTrackerGUI extends JFrame {
                     "Confirm Removal",
                     JOptionPane.YES_NO_OPTION
             );
-    
+
             if (response == JOptionPane.YES_OPTION) {
                 // Proceed with removal
                 Activity activity = activityTracker.getActivityByName(activityName);
@@ -130,12 +134,12 @@ public class ActivityTrackerGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Please select an activity to remove.");
         }
     }
-    
+
     private void viewActivity() {
         String name = activityList.getSelectedValue();
         if (name != null) {
             Activity activity = activityTracker.getActivityByName(name);
-            new ActivityDetailsFrame(activity);
+            new ActivityDetailsFrame(activity, activityTracker, this);
         } else {
             JOptionPane.showMessageDialog(this, "Please select an activity to view.");
         }
@@ -184,6 +188,11 @@ public class ActivityTrackerGUI extends JFrame {
                 activityTracker.sortByTotalTime();
                 break;
         }
+        loadActivitiesIntoList();
+    }
+
+    // Add this method to refresh the activity list
+    public void refreshActivityList() {
         loadActivitiesIntoList();
     }
 

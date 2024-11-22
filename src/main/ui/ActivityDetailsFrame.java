@@ -1,6 +1,7 @@
 package ui;
 
 import model.Activity;
+import model.ActivityTracker;
 import model.Session;
 
 import javax.swing.*;
@@ -13,22 +14,29 @@ import java.time.LocalDateTime;
 public class ActivityDetailsFrame extends JFrame {
 
     private Activity activity;
+    private ActivityTracker activityTracker;
+    private ActivityTrackerGUI mainGUI;
     private DefaultListModel<String> sessionListModel;
+    private JList<String> sessionList;
     private JLabel totalTimeLabel;
     private JLabel streakLabel;
     private JButton startTimerButton;
     private JButton stopTimerButton;
-    private LocalDateTime startTime;
     private JButton viewGraphButton;
+    private JButton editNameButton;
+    private JButton deleteSessionButton;
+    private LocalDateTime startTime;
 
-    public ActivityDetailsFrame(Activity activity) {
+    public ActivityDetailsFrame(Activity activity, ActivityTracker activityTracker, ActivityTrackerGUI mainGUI) {
         super(activity.getName());
         this.activity = activity;
+        this.activityTracker = activityTracker;
+        this.mainGUI = mainGUI;
 
         initializeComponents();
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(500, 400);
+        setSize(600, 400);
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -49,7 +57,7 @@ public class ActivityDetailsFrame extends JFrame {
 
         // Session list
         sessionListModel = new DefaultListModel<>();
-        JList<String> sessionList = new JList<>(sessionListModel);
+        sessionList = new JList<>(sessionListModel);
         loadSessionsIntoList();
         JScrollPane sessionScrollPane = new JScrollPane(sessionList);
 
@@ -66,10 +74,18 @@ public class ActivityDetailsFrame extends JFrame {
         viewGraphButton = new JButton("View Graph");
         viewGraphButton.addActionListener(e -> viewGraph());
 
+        editNameButton = new JButton("Edit Name");
+        editNameButton.addActionListener(e -> editActivityName());
+
+        deleteSessionButton = new JButton("Delete Session");
+        deleteSessionButton.addActionListener(e -> deleteSession());
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(startTimerButton);
         buttonPanel.add(stopTimerButton);
         buttonPanel.add(viewGraphButton);
+        buttonPanel.add(editNameButton);
+        buttonPanel.add(deleteSessionButton);
 
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -122,5 +138,57 @@ public class ActivityDetailsFrame extends JFrame {
 
     private void viewGraph() {
         new GraphFrame(activity);
+    }
+
+    private void editActivityName() {
+        String newName = JOptionPane.showInputDialog(
+                this,
+                "Enter new name for the activity:",
+                activity.getName()
+        );
+
+        if (newName != null && !newName.trim().isEmpty()) {
+            // Check if the name already exists in the tracker
+            if (activityTracker.getActivityByName(newName) == null) {
+                activity.setName(newName);
+                setTitle(newName);
+
+                // Update the activity in the activity list
+                updateActivityInList();
+
+                JOptionPane.showMessageDialog(this, "Activity name updated successfully.");
+            } else {
+                JOptionPane.showMessageDialog(this, "An activity with that name already exists.");
+            }
+        } else if (newName != null) {
+            JOptionPane.showMessageDialog(this, "Activity name cannot be empty.");
+        }
+    }
+
+    private void updateActivityInList() {
+        mainGUI.refreshActivityList();
+    }
+
+    private void deleteSession() {
+        int selectedIndex = sessionList.getSelectedIndex();
+        if (selectedIndex != -1) {
+            Session session = activity.getSessions().get(selectedIndex);
+
+            int response = JOptionPane.showConfirmDialog(
+                    this,
+                    "Are you sure you want to delete this session?",
+                    "Confirm Deletion",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (response == JOptionPane.YES_OPTION) {
+                activity.removeSession(session);
+                sessionListModel.remove(selectedIndex);
+                updateInfoLabels();
+                JOptionPane.showMessageDialog(this, "Session deleted successfully.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a session to delete.");
+        }
     }
 }
