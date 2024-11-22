@@ -11,12 +11,8 @@ import java.util.TreeMap;
 
 public class GraphFrame extends JFrame {
 
-    private Activity activity;
-
     public GraphFrame(Activity activity) {
         super("Session Graph - " + activity.getName());
-        this.activity = activity;
-
         setSize(600, 400);
         setLocationRelativeTo(null); // Center the window
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
