@@ -17,6 +17,7 @@ class JsonWriterTest extends JsonTest {
     @Test
     void testWriterInvalidFile() {
         try {
+            @SuppressWarnings("unused")
             ActivityTracker tracker = new ActivityTracker();
             JsonWriter writer = new JsonWriter("./data/my\0illegal:fileName.json");
             assertThrows(FileNotFoundException.class, writer::open);

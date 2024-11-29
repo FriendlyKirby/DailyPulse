@@ -86,6 +86,9 @@ public class Activity implements Writable {
 
         // Update streak
         updateStreak(session);
+
+        // Log the event
+        EventLog.getInstance().logEvent(new Event("Session added to activity: " + name));
     }
 
     /*
@@ -123,6 +126,9 @@ public class Activity implements Writable {
             this.sessions.remove(session);
             totalTime -= session.getDurationInHours();
             recalculateStreak();
+
+            // Log the event
+            EventLog.getInstance().logEvent(new Event("Session removed from activity: " + name));
         }
     }
 

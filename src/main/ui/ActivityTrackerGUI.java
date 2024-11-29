@@ -2,6 +2,7 @@ package ui;
 
 import model.Activity;
 import model.ActivityTracker;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
@@ -39,8 +40,25 @@ public class ActivityTrackerGUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
+
+        // Add window listener to print events on close
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                printLog(EventLog.getInstance());
+            }
+        });
+
         setVisible(true);
     }
+
+    private void printLog(EventLog el) {
+        System.out.println("Event Log:");
+        for (model.Event next : el) {
+            System.out.println(next.toString());
+        }
+    }
+
 
     private void initializeComponents() {
         setLayout(new BorderLayout());

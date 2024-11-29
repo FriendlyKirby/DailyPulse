@@ -27,6 +27,9 @@ public class ActivityTracker implements Writable {
     public void addActivity(Activity activity) {
         if (!activities.contains(activity)) {
             activities.add(activity);
+
+            // Log the event
+            EventLog.getInstance().logEvent(new Event("Activity added: " + activity.getName()));
         }
     }
 
@@ -40,6 +43,9 @@ public class ActivityTracker implements Writable {
             throw new IllegalArgumentException("Activity not found");
         }
         activities.remove(activity);
+
+        // Log the event
+        EventLog.getInstance().logEvent(new Event("Activity removed: " + activity.getName()));
     }
 
     /*
