@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.Map;
 import java.util.TreeMap;
 
+// Represents the graph gui
 public class GraphFrame extends JFrame {
 
     public GraphFrame(Activity activity) {

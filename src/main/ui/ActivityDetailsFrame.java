@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 // Referenced CPSC210 GUI Projects
+// Represents the sessions gui
 public class ActivityDetailsFrame extends JFrame {
 
     private Activity activity;

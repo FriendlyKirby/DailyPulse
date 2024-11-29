@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // Referenced CPSC210 GUI Projects
+// Represents the activity gui
 public class ActivityTrackerGUI extends JFrame {
 
     private ActivityTracker activityTracker;
