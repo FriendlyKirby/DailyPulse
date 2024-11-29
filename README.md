@@ -75,3 +75,28 @@ all about.
     - A file chooser dialog will appear. Navigate to the location of your previously saved activity tracker file.
     - Selecting the file and confirming the load operation.
     - The application will load your activities and sessions from the file, and the main window will update to reflect the loaded data.
+
+# Phase4: Task 2
+Event Log:
+Fri Nov 29 13:09:47 PST 2024
+Event log cleared.
+Fri Nov 29 13:09:53 PST 2024
+Activity added: 1
+Fri Nov 29 13:09:56 PST 2024
+Activity added: 2
+Fri Nov 29 13:09:59 PST 2024
+Activity added: 3
+Fri Nov 29 13:10:04 PST 2024
+Session added to activity: 2
+Fri Nov 29 13:10:08 PST 2024
+Activity added: 4
+Fri Nov 29 13:10:12 PST 2024
+Session added to activity: 2
+Fri Nov 29 13:10:15 PST 2024
+Activity added: 5
+Fri Nov 29 13:10:18 PST 2024
+Activity removed: 3
+Fri Nov 29 13:10:21 PST 2024
+Session removed from activity: 2
+Fri Nov 29 13:10:25 PST 2024
+Activity added: 3

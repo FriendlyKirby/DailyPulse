@@ -35,6 +35,9 @@ public class ActivityTrackerGUI extends JFrame {
         super("DailyPulse Activity Tracker");
         activityTracker = new ActivityTracker();
 
+        // Clears event log on start
+        EventLog.getInstance().clear();
+
         initializeComponents();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
