@@ -28,6 +28,13 @@ public class ActivityDetailsFrame extends JFrame {
     private JButton deleteSessionButton;
     private LocalDateTime startTime;
 
+    /*
+     * REQUIRES: activity, activityTracker, and mainGUI are not null
+     * MODIFIES: this
+     * EFFECTS: initializes the ActivityDetailsFrame with the given activity,
+     * activityTracker, and mainGUI;
+     * sets up the GUI components
+     */
     public ActivityDetailsFrame(Activity activity, ActivityTracker activityTracker, ActivityTrackerGUI mainGUI) {
         super(activity.getName());
         this.activity = activity;
@@ -42,6 +49,10 @@ public class ActivityDetailsFrame extends JFrame {
         setVisible(true);
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: initializes GUI components and layouts
+     */
     private void initializeComponents() {
         setLayout(new BorderLayout());
 
@@ -50,6 +61,10 @@ public class ActivityDetailsFrame extends JFrame {
         addButtonPanel();
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: adds information panel with total time and streak labels
+     */
     private void addInfoPanel() {
         totalTimeLabel = new JLabel("Total Time: " + String.format("%.2f", activity.getTotalTime()) + " hours");
         streakLabel = new JLabel("Streak: " + activity.getStreak() + " days");
@@ -62,6 +77,10 @@ public class ActivityDetailsFrame extends JFrame {
         add(infoPanel, BorderLayout.NORTH);
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: adds the session list to the GUI
+     */
     private void addSessionList() {
         sessionListModel = new DefaultListModel<>();
         sessionList = new JList<>(sessionListModel);
@@ -71,6 +90,10 @@ public class ActivityDetailsFrame extends JFrame {
         add(sessionScrollPane, BorderLayout.CENTER);
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: adds buttons to the GUI and sets up their action listeners
+     */
     private void addButtonPanel() {
         startTimerButton = new JButton("Start Timer");
         stopTimerButton = new JButton("Stop Timer");
@@ -98,6 +121,10 @@ public class ActivityDetailsFrame extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /*
+     * MODIFIES: sessionListModel
+     * EFFECTS: loads sessions from the activity into the session list model
+     */
     private void loadSessionsIntoList() {
         sessionListModel.clear();
         for (Session session : activity.getSessions()) {
@@ -105,6 +132,10 @@ public class ActivityDetailsFrame extends JFrame {
         }
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: starts the timer and updates the GUI accordingly
+     */
     private void startTimer() {
         startTime = LocalDateTime.now();
         JOptionPane.showMessageDialog(this, "Timer started at " + startTime.toString());
@@ -112,6 +143,10 @@ public class ActivityDetailsFrame extends JFrame {
         stopTimerButton.setEnabled(true);
     }
 
+    /*
+     * MODIFIES: this, activity
+     * EFFECTS: stops the timer, creates a new session, updates activity and GUI
+     */
     private void stopTimer() {
         if (startTime != null) {
             LocalDateTime endTime = LocalDateTime.now();
@@ -139,15 +174,26 @@ public class ActivityDetailsFrame extends JFrame {
         }
     }
 
+    /*
+     * MODIFIES: totalTimeLabel, streakLabel
+     * EFFECTS: updates the labels showing total time and streak
+     */
     private void updateInfoLabels() {
         totalTimeLabel.setText("Total Time: " + String.format("%.2f", activity.getTotalTime()) + " hours");
         streakLabel.setText("Streak: " + activity.getStreak() + " days");
     }
 
+    /*
+     * EFFECTS: opens a new GraphFrame to display the activity's session graph
+     */
     private void viewGraph() {
         new GraphFrame(activity);
     }
 
+    /*
+     * MODIFIES: activity, mainGUI
+     * EFFECTS: allows user to edit the activity's name and updates GUI accordingly
+     */
     private void editActivityName() {
         String newName = JOptionPane.showInputDialog(
                 this,
@@ -172,10 +218,18 @@ public class ActivityDetailsFrame extends JFrame {
         }
     }
 
+    /*
+     * MODIFIES: mainGUI
+     * EFFECTS: refreshes the activity list in the main GUI
+     */
     private void updateActivityInList() {
         mainGUI.refreshActivityList();
     }
 
+    /*
+     * MODIFIES: activity, sessionListModel
+     * EFFECTS: deletes the selected session from the activity and updates GUI
+     */
     private void deleteSession() {
         int selectedIndex = sessionList.getSelectedIndex();
         if (selectedIndex != -1) {

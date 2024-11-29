@@ -12,6 +12,11 @@ import java.util.TreeMap;
 // Represents the graph gui
 public class GraphFrame extends JFrame {
 
+    /*
+     * REQUIRES: activity is not null
+     * MODIFIES: this
+     * EFFECTS: initializes the GraphFrame and sets up the GUI components
+     */
     public GraphFrame(Activity activity) {
         super("Session Graph - " + activity.getName());
         setSize(600, 400);
@@ -27,6 +32,11 @@ public class GraphFrame extends JFrame {
     class GraphPanel extends JPanel {
         private Map<LocalDate, Double> dateTimeMap;
 
+        /*
+         * REQUIRES: activity is not null
+         * MODIFIES: this
+         * EFFECTS: processes the session data from the activity for graphing
+         */
         public GraphPanel(Activity activity) {
             // Process the session data
             dateTimeMap = new TreeMap<>();
@@ -37,6 +47,10 @@ public class GraphFrame extends JFrame {
             }
         }
 
+        /*
+         * MODIFIES: g
+         * EFFECTS: draws the graph based on session data
+         */
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -61,12 +75,20 @@ public class GraphFrame extends JFrame {
             drawXAxisAndBars(g, padding, labelPadding, maxDuration, width, height);
         }
 
+        /*
+         * MODIFIES: g
+         * EFFECTS: draws the background of the graph area
+         */
         private void drawBackground(Graphics g, int padding, int labelPadding, int width, int height) {
             g.setColor(Color.WHITE);
             g.fillRect(padding + labelPadding, padding, width, height);
             g.setColor(Color.BLACK);
         }
 
+        /*
+         * MODIFIES: g
+         * EFFECTS: draws the Y-axis labels and grid lines
+         */
         private void drawYAxis(Graphics g, int padding, int labelPadding, int numYDivisions,
                 double maxDuration, int width, int height) {
             for (int i = 0; i <= numYDivisions; i++) {
@@ -79,6 +101,10 @@ public class GraphFrame extends JFrame {
             }
         }
 
+        /*
+         * MODIFIES: g
+         * EFFECTS: draws the X-axis labels and bars representing session durations
+         */
         private void drawXAxisAndBars(Graphics g, int padding, int labelPadding,
                 double maxDuration, int width, int height) {
             int barWidth = width / dateTimeMap.size();
@@ -106,6 +132,9 @@ public class GraphFrame extends JFrame {
             }
         }
 
+        /*
+         * EFFECTS: returns the maximum duration value from the session data
+         */
         private double getMaxDuration() {
             double max = 0;
             for (double duration : dateTimeMap.values()) {

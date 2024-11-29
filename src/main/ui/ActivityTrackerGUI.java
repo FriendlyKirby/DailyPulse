@@ -55,6 +55,9 @@ public class ActivityTrackerGUI extends JFrame {
         setVisible(true);
     }
 
+    /*
+     * EFFECTS: prints the events from the event log to the console
+     */
     private void printLog(EventLog el) {
         System.out.println("Event Log:");
         for (model.Event next : el) {
@@ -62,7 +65,10 @@ public class ActivityTrackerGUI extends JFrame {
         }
     }
 
-
+    /*
+     * MODIFIES: this
+     * EFFECTS: initializes GUI components and layouts
+     */
     private void initializeComponents() {
         setLayout(new BorderLayout());
 
@@ -75,6 +81,10 @@ public class ActivityTrackerGUI extends JFrame {
         addDoubleClickListener();
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: initializes the activity list component
+     */
     private void initializeActivityList() {
         activityListModel = new DefaultListModel<>();
         activityList = new JList<>(activityListModel);
@@ -84,6 +94,10 @@ public class ActivityTrackerGUI extends JFrame {
         loadActivitiesIntoList();
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: creates buttons and adds action listeners
+     */
     private void createButtons() {
         addButton = new JButton("Add Activity");
         removeButton = new JButton("Remove Activity");
@@ -102,6 +116,10 @@ public class ActivityTrackerGUI extends JFrame {
         sortComboBox.addActionListener(e -> sortActivities(sortComboBox.getSelectedItem().toString()));
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: adds the button panel to the GUI
+     */
     private void addButtonPanel() {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addButton);
@@ -115,6 +133,11 @@ public class ActivityTrackerGUI extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /*
+     * MODIFIES: this
+     * EFFECTS: adds a double-click listener to the activity list to open the
+     * activity details
+     */
     private void addDoubleClickListener() {
         activityList.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
@@ -125,6 +148,10 @@ public class ActivityTrackerGUI extends JFrame {
         });
     }
 
+    /*
+     * MODIFIES: activityListModel
+     * EFFECTS: loads activities from the activity tracker into the list model
+     */
     private void loadActivitiesIntoList() {
         activityListModel.clear();
         for (Activity activity : activityTracker.getActivities()) {
@@ -132,6 +159,10 @@ public class ActivityTrackerGUI extends JFrame {
         }
     }
 
+    /*
+     * MODIFIES: this, activityTracker
+     * EFFECTS: adds a new activity to the tracker and updates the GUI
+     */
     private void addActivity() {
         String name = JOptionPane.showInputDialog(this, "Enter the name of the new activity:");
         if (name != null && !name.trim().isEmpty()) {
@@ -147,6 +178,10 @@ public class ActivityTrackerGUI extends JFrame {
         }
     }
 
+    /*
+     * MODIFIES: this, activityTracker
+     * EFFECTS: removes the selected activity from the tracker and updates the GUI
+     */
     private void removeActivity() {
         int selectedIndex = activityList.getSelectedIndex();
         if (selectedIndex != -1) {
@@ -170,6 +205,9 @@ public class ActivityTrackerGUI extends JFrame {
         }
     }
 
+    /*
+     * EFFECTS: opens a new ActivityDetailsFrame for the selected activity
+     */
     private void viewActivity() {
         String name = activityList.getSelectedValue();
         if (name != null) {
@@ -180,6 +218,9 @@ public class ActivityTrackerGUI extends JFrame {
         }
     }
 
+    /*
+     * EFFECTS: saves the activity tracker to a file chosen by the user
+     */
     private void saveActivityTracker() {
         JFileChooser fileChooser = new JFileChooser();
         if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -196,6 +237,11 @@ public class ActivityTrackerGUI extends JFrame {
         }
     }
 
+    /*
+     * MODIFIES: this, activityTracker
+     * EFFECTS: loads the activity tracker from a file chosen by the user and
+     * updates the GUI
+     */
     private void loadActivityTracker() {
         JFileChooser fileChooser = new JFileChooser();
         if (fileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -211,6 +257,11 @@ public class ActivityTrackerGUI extends JFrame {
         }
     }
 
+    /*
+     * MODIFIES: activityTracker
+     * EFFECTS: sorts activities in the tracker based on the selected criterion and
+     * updates the GUI
+     */
     private void sortActivities(String criterion) {
         switch (criterion) {
             case "Name":
@@ -227,6 +278,10 @@ public class ActivityTrackerGUI extends JFrame {
     }
 
     // Add this method to refresh the activity list
+    /*
+     * MODIFIES: activityListModel
+     * EFFECTS: refreshes the activity list in the GUI
+     */
     public void refreshActivityList() {
         loadActivitiesIntoList();
     }
